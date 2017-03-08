@@ -83,8 +83,7 @@ namespace AlltBokatWebAPI.Controllers
             }
             var booking = BookingRequest.BookingModel;
             var timeSlot = BookingRequest.BookingTimeSlotModel;
-
-
+            
             
             try
             { 

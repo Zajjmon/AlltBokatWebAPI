@@ -11,6 +11,9 @@ namespace AlltBokatWebAPI.Models
         [Key]
         public int Id { get; set; }
         public int Rating { get; set; }
+
+
+        public string ApplicationUserId { get; set; }
         public virtual ApplicationUser ApplicationUser { get; set; }
     }
 }

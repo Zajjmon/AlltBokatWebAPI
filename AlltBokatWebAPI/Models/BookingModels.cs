@@ -24,7 +24,7 @@ namespace AlltBokatWebAPI.Models
 
        
 
-        
+        public string ApplicationUserId { get; set; }
         public virtual ApplicationUser ApplicationUser { get; set; }
         
         public int bookingTimeSlotId { get; set; }
