@@ -227,6 +227,10 @@
     <Compile Include="Migrations\201703081217219_AddedForeignKeyBooking.Designer.cs">
       <DependentUpon>201703081217219_AddedForeignKeyBooking.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201703081357538_ApplicationUserIdChanged.cs" />
+    <Compile Include="Migrations\201703081357538_ApplicationUserIdChanged.Designer.cs">
+      <DependentUpon>201703081357538_ApplicationUserIdChanged.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountBindingModels.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -318,6 +322,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201703081217219_AddedForeignKeyBooking.resx">
       <DependentUpon>201703081217219_AddedForeignKeyBooking.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201703081357538_ApplicationUserIdChanged.resx">
+      <DependentUpon>201703081357538_ApplicationUserIdChanged.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
