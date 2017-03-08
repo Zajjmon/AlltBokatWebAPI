@@ -9,10 +9,11 @@ namespace AlltBokatWebAPI.Models
     public class BookingTimeSlotModels
     {
         [Key]
-        public int bookingTimeSlotId { get; set; }
+        public int Id { get; set; }
         public DateTime startTime { get; set; }
         public DateTime endTime { get; set; }
 
+        public int BookingModelId { get; set; }
         public virtual BookingModels BookingModel { get; set; }
     }
 }

@@ -11,6 +11,7 @@ using System.Web.Http;
 using System.Web.Http.Description;
 using AlltBokatWebAPI.Models;
 using AlltBokatWebAPI.DAL;
+using AlltBokatWebAPI.Models.ViewModels;
 
 namespace AlltBokatWebAPI.Controllers
 {
@@ -73,41 +74,35 @@ namespace AlltBokatWebAPI.Controllers
         }
 
         // POST: api/BookingModels
-        [ResponseType(typeof(BookingModels))]
-        public async Task<IHttpActionResult> PostBookingModels(BookingModels bookingModels, DateTime StartTime, DateTime EndTime)
+        [ResponseType(typeof(BookingWithTimeViewModel))]
+        public async Task<IHttpActionResult> PostBookingModels(BookingWithTimeViewModel BookingRequest)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
-            BookingTimeSlotModels TimeSloten = new BookingTimeSlotModels();
-            TimeSloten.startTime = StartTime;
-            TimeSloten.endTime = EndTime;
+            var booking = BookingRequest.BookingModel;
+            var timeSlot = BookingRequest.BookingTimeSlotModel;
 
-            bookingModels.bookingTimeSlot = TimeSloten;
+
+            
             try
             { 
-            db.Bookings.Add(bookingModels);
+            db.BookingTimeSlots.Add(timeSlot);
+
             await db.SaveChangesAsync();
+                booking.bookingTimeSlotId = timeSlot.Id;
                 
 
 
 
-
-
-
-            db.Bookings.Add(bookingModels);
-            ApplicationUser user = new ApplicationUser();
-            var userid = user.Id;
-            
-          
-
-                
+            db.Bookings.Add(booking);
+                await db.SaveChangesAsync();
 
             }
             catch (DbUpdateException)
-            {                                     // fungerar denna OR-operand??
-                if (BookingModelsExists(bookingModels.Id))
+            {                                     
+                if (BookingModelsExists(booking.Id))
                 {
                     return Conflict();
                 }
@@ -118,7 +113,7 @@ namespace AlltBokatWebAPI.Controllers
                 
             }
 
-            return CreatedAtRoute("DefaultApi", new { id = bookingModels.Id }, bookingModels);
+            return CreatedAtRoute("DefaultApi", new { id = booking.Id }, booking);
         }
 
         // DELETE: api/BookingModels/5
@@ -152,7 +147,7 @@ namespace AlltBokatWebAPI.Controllers
         }
         private bool BookingTimeModelsExists(int id)
         {
-            return db.BookingTimeSlots.Count(e => e.bookingTimeSlotId == id) > 0;
+            return db.BookingTimeSlots.Count(e => e.Id == id) > 0;
         }
         private void SendBookingNotificationMail(BookingModels bookingModels, BookingTimeSlotModels bookingTimeSlotModels)
         {

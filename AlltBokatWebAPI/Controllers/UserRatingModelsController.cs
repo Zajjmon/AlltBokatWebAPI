@@ -45,7 +45,7 @@ namespace AlltBokatWebAPI.Controllers
                 return BadRequest(ModelState);
             }
 
-            if (id != userRatingModels.UserRatingId)
+            if (id != userRatingModels.Id)
             {
                 return BadRequest();
             }
@@ -83,7 +83,7 @@ namespace AlltBokatWebAPI.Controllers
             db.UserRatings.Add(userRatingModels);
             await db.SaveChangesAsync();
 
-            return CreatedAtRoute("DefaultApi", new { id = userRatingModels.UserRatingId }, userRatingModels);
+            return CreatedAtRoute("DefaultApi", new { id = userRatingModels.Id }, userRatingModels);
         }
 
         // DELETE: api/UserRatingModels/5
@@ -113,7 +113,7 @@ namespace AlltBokatWebAPI.Controllers
 
         private bool UserRatingModelsExists(int id)
         {
-            return db.UserRatings.Count(e => e.UserRatingId == id) > 0;
+            return db.UserRatings.Count(e => e.Id == id) > 0;
         }
     }
 }
