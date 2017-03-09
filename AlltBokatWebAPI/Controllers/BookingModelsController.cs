@@ -97,8 +97,7 @@ namespace AlltBokatWebAPI.Controllers
 
 
             db.Bookings.Add(bookingModels);
-            ApplicationUser user = new ApplicationUser();
-            var userid = user.Id;
+            
             
           
 

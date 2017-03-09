@@ -8,12 +8,31 @@ namespace AlltBokatWebAPI.DAL
 {
     public static class Users
     {
-        public static ApplicationUser GetApplicationUserbyId(string id)
+        public static string GetApplicationUserNameById(string id)
         {
             using (var db = new ApplicationDbContext())
             {
-                return db.Users.Find(id);
+                ApplicationUser u = new ApplicationUser();
+                u = db.Users.Find(id);
+                string usrName = u.UserName;
+                return usrName;
             }
         }
+
+        public static string GetApplicationUserNamesById(string id)
+        {
+            using (var db = new ApplicationDbContext())
+            {
+                ApplicationUser u = new ApplicationUser();
+                u = db.Users.Find(id);
+                string usrName = u.UserName;
+                return usrName;
+            }
+        }
+
+
+
+
+
     }
 }
