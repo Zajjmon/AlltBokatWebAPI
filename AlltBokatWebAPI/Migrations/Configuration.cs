@@ -15,6 +15,7 @@ namespace AlltBokatWebAPI.Migrations
             AutomaticMigrationsEnabled = false;
         }
 
+
         protected override void Seed(AlltBokatWebAPI.Models.ApplicationDbContext context)
         {
             AddUserAndRole(context);

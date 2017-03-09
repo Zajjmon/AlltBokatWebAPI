@@ -10,6 +10,7 @@ namespace AlltBokatWebAPI.Models
     public class BookingModels
     {
         [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
 
         [DataType(DataType.EmailAddress)] // TO-DO lägg till REGEX-sträng för EMAIL
@@ -17,7 +18,7 @@ namespace AlltBokatWebAPI.Models
 
         public string CustomerName { get; set; }
 
-
+        
         public string description { get; set; }
 
         
@@ -26,9 +27,11 @@ namespace AlltBokatWebAPI.Models
 
         public string ApplicationUserId { get; set; }
         public virtual ApplicationUser ApplicationUser { get; set; }
+
+        [ForeignKey("BookingTimeSlotModels")]
+        public int BookingTimeSlotModelsId { get; set; }
         
-        public int bookingTimeSlotId { get; set; }
-        public virtual BookingTimeSlotModels bookingTimeSlot { get; set; }
+        public virtual BookingTimeSlotModels BookingTimeSlotModels { get; set; }
 
 
 

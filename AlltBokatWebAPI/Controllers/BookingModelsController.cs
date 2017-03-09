@@ -20,9 +20,13 @@ namespace AlltBokatWebAPI.Controllers
         private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: api/BookingModels
-        public IQueryable<BookingModels> GetBookings()
+        public IQueryable<BookingWithoutNavProp> GetBookings()
         {
-            return db.Bookings;
+            List<BookingWithoutNavProp> bookingList = BookingDAL.GetAllBookingsWithoutNavProps();
+
+            IQueryable<BookingWithoutNavProp> bookingListan = bookingList.AsQueryable();
+            return bookingListan;
+            //return db.Bookings.AsQueryable();
         }
 
         // GET: api/BookingModels/5
@@ -77,12 +81,31 @@ namespace AlltBokatWebAPI.Controllers
         [ResponseType(typeof(BookingWithTimeViewModel))]
         public async Task<IHttpActionResult> PostBookingModels(BookingWithTimeViewModel BookingRequest)
         {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
+            //if (!ModelState.IsValid)
+            //{
+            //    return BadRequest(ModelState);
+            //}
+
+            //var bookingTest = new BookingModels();
+
+            //bookingTest.ApplicationUserId = "3196ceac-7cb4-4ac1-8b16-cd0c0f12dd12";
+            //bookingTest.BookingTimeSlotModelsId = 4;
+            //bookingTest.CustomerEmail = "zajjmon01@gmail.com";
+            //bookingTest.CustomerName = "Simon";
+            //bookingTest.description = "test description";
+            //bookingTest.Id = 15;
+            //bookingTest.BookingTimeSlotModels = db.BookingTimeSlots.Find(4);
+            //bookingTest.ApplicationUser = db.Users.Find("3196ceac-7cb4-4ac1-8b16-cd0c0f12dd12");
+
+            
+            //db.Bookings.Add(bookingTest);
+            //await db.SaveChangesAsync();
+            
+
+
             var booking = BookingRequest.BookingModel;
             var timeSlot = BookingRequest.BookingTimeSlotModel;
+            
             
             
             try
@@ -90,7 +113,7 @@ namespace AlltBokatWebAPI.Controllers
             db.BookingTimeSlots.Add(timeSlot);
 
             await db.SaveChangesAsync();
-                booking.bookingTimeSlotId = timeSlot.Id;
+                booking.BookingTimeSlotModelsId = timeSlot.Id;
                 
 
 
