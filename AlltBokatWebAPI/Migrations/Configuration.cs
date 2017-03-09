@@ -15,6 +15,7 @@ namespace AlltBokatWebAPI.Migrations
             AutomaticMigrationsEnabled = false;
         }
 
+
         protected override void Seed(AlltBokatWebAPI.Models.ApplicationDbContext context)
         {
             AddUserAndRole(context);
@@ -40,37 +41,15 @@ namespace AlltBokatWebAPI.Migrations
             ir = rm.Create(new IdentityRole("canEdit"));
             var um = new UserManager<ApplicationUser>(
                 new UserStore<ApplicationUser>(context));
-
-
             var user = new ApplicationUser()
             {
                 UserName = "user1@contoso.com",
             };
-
             ir = um.Create(user, "P_assw0rd1");
             if (ir.Succeeded == false)
                 return ir.Succeeded;
             ir = um.AddToRole(user.Id, "canEdit");
             return ir.Succeeded;
-
-
-
-            var user2 = new ApplicationUser()
-            {
-                UserName = "david1@contoso.com",
-            };
-
-           
-
-            ir = um.Create(user2, "P_assw0rd2");
-            if (ir.Succeeded == false)
-                return ir.Succeeded;
-            ir = um.AddToRole(user2.Id, "canEdit");
-            return ir.Succeeded;
-
-          
-
-
         }
     }
 }

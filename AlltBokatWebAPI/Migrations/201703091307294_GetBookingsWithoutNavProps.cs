@@ -3,16 +3,16 @@ namespace AlltBokatWebAPI.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class BookIngModelUpdate : DbMigration
+    public partial class GetBookingsWithoutNavProps : DbMigration
     {
         public override void Up()
         {
-            AddColumn("dbo.BookingModels", "CustomerName", c => c.String());
+            DropColumn("dbo.BookingModels", "SimonsTextTest");
         }
         
         public override void Down()
         {
-            DropColumn("dbo.BookingModels", "CustomerName");
+            AddColumn("dbo.BookingModels", "SimonsTextTest", c => c.String());
         }
     }
 }

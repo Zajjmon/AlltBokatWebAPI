@@ -7,13 +7,13 @@ namespace AlltBokatWebAPI.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class BookIngModelUpdate : IMigrationMetadata
+    public sealed partial class GetBookingsWithoutNavProps : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(BookIngModelUpdate));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(GetBookingsWithoutNavProps));
         
         string IMigrationMetadata.Id
         {
-            get { return "201703021033049_BookIngModelUpdate"; }
+            get { return "201703091307294_GetBookingsWithoutNavProps"; }
         }
         
         string IMigrationMetadata.Source

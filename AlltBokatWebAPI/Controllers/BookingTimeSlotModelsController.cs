@@ -45,7 +45,8 @@ namespace AlltBokatWebAPI.Controllers
                 return BadRequest(ModelState);
             }
 
-            if (id != bookingTimeSlotModels.bookingTimeSlotId)
+            if (id != bookingTimeSlotModels.Id
+                )
             {
                 return BadRequest();
             }
@@ -83,7 +84,7 @@ namespace AlltBokatWebAPI.Controllers
             db.BookingTimeSlots.Add(bookingTimeSlotModels);
             await db.SaveChangesAsync();
 
-            return CreatedAtRoute("DefaultApi", new { id = bookingTimeSlotModels.bookingTimeSlotId }, bookingTimeSlotModels);
+            return CreatedAtRoute("DefaultApi", new { id = bookingTimeSlotModels.Id }, bookingTimeSlotModels);
         }
 
         // DELETE: api/BookingTimeSlotModels/5
@@ -113,7 +114,7 @@ namespace AlltBokatWebAPI.Controllers
 
         private bool BookingTimeSlotModelsExists(int id)
         {
-            return db.BookingTimeSlots.Count(e => e.bookingTimeSlotId == id) > 0;
+            return db.BookingTimeSlots.Count(e => e.Id == id) > 0;
         }
     }
 }

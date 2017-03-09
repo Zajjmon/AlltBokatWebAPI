@@ -40,20 +40,32 @@ namespace AlltBokatWebAPI.Models
             base.OnModelCreating(modelBuilder);
 
 
-            
+
+            //modelBuilder.Entity<BookingModels>()
+            //    .HasRequired(s => s.BookingTimeSlotModels)
+            //    .(b => b.BookingModels);
+
+
+            //modelBuilder.Entity<BookingModels>()
+            //    .HasRequired(t => t.BookingTimeSlotModels)
+            //    .WithOptional()
+
             modelBuilder.Entity<BookingModels>()
                 .HasRequired(a => a.ApplicationUser)
                 .WithMany(b => b.Bookings)
-                .Map(m => m.MapKey("UserId")); 
+                .HasForeignKey(t => t.ApplicationUserId);
 
-            modelBuilder.Entity<BookingTimeSlotModels>()
-                .HasOptional(b => b.BookingModel)
-                .WithRequired(b => b.bookingTimeSlot);
+
+
+            //modelBuilder.Entity<BookingTimeSlotModels>()
+            //    .HasOptional(b => b.BookingModels)
+            //    .WithRequired(b => b.BookingTimeSlotModels);
 
             modelBuilder.Entity<UserRatingModels>()
                 .HasRequired(a => a.ApplicationUser)
                 .WithMany(u => u.UserRatings)
-                .Map(m => m.MapKey("UserId")); 
+                .HasForeignKey(t => t.ApplicationUserId);
+                
         }
 
         public static ApplicationDbContext Create()

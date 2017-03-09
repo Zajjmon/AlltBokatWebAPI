@@ -212,17 +212,18 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\UserRatingModelsController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
+    <Compile Include="DAL\BookingDAL.cs" />
     <Compile Include="DAL\Users.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201703020940270_StartPoint.cs" />
-    <Compile Include="Migrations\201703020940270_StartPoint.Designer.cs">
-      <DependentUpon>201703020940270_StartPoint.cs</DependentUpon>
+    <Compile Include="Migrations\201703091101499_InitialCreate.cs" />
+    <Compile Include="Migrations\201703091101499_InitialCreate.Designer.cs">
+      <DependentUpon>201703091101499_InitialCreate.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201703021033049_BookIngModelUpdate.cs" />
-    <Compile Include="Migrations\201703021033049_BookIngModelUpdate.Designer.cs">
-      <DependentUpon>201703021033049_BookIngModelUpdate.cs</DependentUpon>
+    <Compile Include="Migrations\201703091307294_GetBookingsWithoutNavProps.cs" />
+    <Compile Include="Migrations\201703091307294_GetBookingsWithoutNavProps.Designer.cs">
+      <DependentUpon>201703091307294_GetBookingsWithoutNavProps.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\201703081424250_y.cs" />
     <Compile Include="Migrations\201703081424250_y.Designer.cs">
@@ -236,6 +237,7 @@
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\MailTestKlassGMail.cs" />
     <Compile Include="Models\UserRatingModels.cs" />
+    <Compile Include="Models\ViewModels\BookingWithoutNavProp.cs" />
     <Compile Include="Models\ViewModels\BookingWithTimeViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Providers\ApplicationOAuthProvider.cs" />
@@ -311,11 +313,11 @@
     <Content Include="Scripts\jquery-1.10.2.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201703020940270_StartPoint.resx">
-      <DependentUpon>201703020940270_StartPoint.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201703091101499_InitialCreate.resx">
+      <DependentUpon>201703091101499_InitialCreate.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201703021033049_BookIngModelUpdate.resx">
-      <DependentUpon>201703021033049_BookIngModelUpdate.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201703091307294_GetBookingsWithoutNavProps.resx">
+      <DependentUpon>201703091307294_GetBookingsWithoutNavProps.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201703081424250_y.resx">
       <DependentUpon>201703081424250_y.cs</DependentUpon>

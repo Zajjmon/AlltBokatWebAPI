@@ -3,7 +3,7 @@ namespace AlltBokatWebAPI.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class StartPoint : DbMigration
+    public partial class InitialCreate : DbMigration
     {
         public override void Up()
         {
@@ -11,16 +11,19 @@ namespace AlltBokatWebAPI.Migrations
                 "dbo.BookingModels",
                 c => new
                     {
-                        Id = c.Int(nullable: false),
+                        Id = c.Int(nullable: false, identity: true),
                         CustomerEmail = c.String(),
+                        CustomerName = c.String(),
+                        SimonsTextTest = c.String(),
                         description = c.String(),
-                        UserId = c.String(nullable: false, maxLength: 128),
+                        ApplicationUserId = c.String(nullable: false, maxLength: 128),
+                        BookingTimeSlotModelsId = c.Int(nullable: false),
                     })
                 .PrimaryKey(t => t.Id)
-                .ForeignKey("dbo.AspNetUsers", t => t.UserId, cascadeDelete: true)
-                .ForeignKey("dbo.BookingTimeSlotModels", t => t.Id)
-                .Index(t => t.Id)
-                .Index(t => t.UserId);
+                .ForeignKey("dbo.AspNetUsers", t => t.ApplicationUserId, cascadeDelete: true)
+                .ForeignKey("dbo.BookingTimeSlotModels", t => t.BookingTimeSlotModelsId, cascadeDelete: true)
+                .Index(t => t.ApplicationUserId)
+                .Index(t => t.BookingTimeSlotModelsId);
             
             CreateTable(
                 "dbo.AspNetUsers",
@@ -84,23 +87,23 @@ namespace AlltBokatWebAPI.Migrations
                 "dbo.UserRatingModels",
                 c => new
                     {
-                        UserRatingId = c.Int(nullable: false, identity: true),
+                        Id = c.Int(nullable: false, identity: true),
                         Rating = c.Int(nullable: false),
-                        UserId = c.String(nullable: false, maxLength: 128),
+                        ApplicationUserId = c.String(nullable: false, maxLength: 128),
                     })
-                .PrimaryKey(t => t.UserRatingId)
-                .ForeignKey("dbo.AspNetUsers", t => t.UserId, cascadeDelete: true)
-                .Index(t => t.UserId);
+                .PrimaryKey(t => t.Id)
+                .ForeignKey("dbo.AspNetUsers", t => t.ApplicationUserId, cascadeDelete: true)
+                .Index(t => t.ApplicationUserId);
             
             CreateTable(
                 "dbo.BookingTimeSlotModels",
                 c => new
                     {
-                        bookingTimeSlotId = c.Int(nullable: false, identity: true),
+                        Id = c.Int(nullable: false, identity: true),
                         startTime = c.DateTime(nullable: false),
                         endTime = c.DateTime(nullable: false),
                     })
-                .PrimaryKey(t => t.bookingTimeSlotId);
+                .PrimaryKey(t => t.Id);
             
             CreateTable(
                 "dbo.AspNetRoles",
@@ -117,21 +120,21 @@ namespace AlltBokatWebAPI.Migrations
         public override void Down()
         {
             DropForeignKey("dbo.AspNetUserRoles", "RoleId", "dbo.AspNetRoles");
-            DropForeignKey("dbo.BookingModels", "Id", "dbo.BookingTimeSlotModels");
-            DropForeignKey("dbo.BookingModels", "UserId", "dbo.AspNetUsers");
-            DropForeignKey("dbo.UserRatingModels", "UserId", "dbo.AspNetUsers");
+            DropForeignKey("dbo.BookingModels", "BookingTimeSlotModelsId", "dbo.BookingTimeSlotModels");
+            DropForeignKey("dbo.BookingModels", "ApplicationUserId", "dbo.AspNetUsers");
+            DropForeignKey("dbo.UserRatingModels", "ApplicationUserId", "dbo.AspNetUsers");
             DropForeignKey("dbo.AspNetUserRoles", "UserId", "dbo.AspNetUsers");
             DropForeignKey("dbo.AspNetUserLogins", "UserId", "dbo.AspNetUsers");
             DropForeignKey("dbo.AspNetUserClaims", "UserId", "dbo.AspNetUsers");
             DropIndex("dbo.AspNetRoles", "RoleNameIndex");
-            DropIndex("dbo.UserRatingModels", new[] { "UserId" });
+            DropIndex("dbo.UserRatingModels", new[] { "ApplicationUserId" });
             DropIndex("dbo.AspNetUserRoles", new[] { "RoleId" });
             DropIndex("dbo.AspNetUserRoles", new[] { "UserId" });
             DropIndex("dbo.AspNetUserLogins", new[] { "UserId" });
             DropIndex("dbo.AspNetUserClaims", new[] { "UserId" });
             DropIndex("dbo.AspNetUsers", "UserNameIndex");
-            DropIndex("dbo.BookingModels", new[] { "UserId" });
-            DropIndex("dbo.BookingModels", new[] { "Id" });
+            DropIndex("dbo.BookingModels", new[] { "BookingTimeSlotModelsId" });
+            DropIndex("dbo.BookingModels", new[] { "ApplicationUserId" });
             DropTable("dbo.AspNetRoles");
             DropTable("dbo.BookingTimeSlotModels");
             DropTable("dbo.UserRatingModels");

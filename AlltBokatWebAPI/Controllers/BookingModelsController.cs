@@ -11,6 +11,7 @@ using System.Web.Http;
 using System.Web.Http.Description;
 using AlltBokatWebAPI.Models;
 using AlltBokatWebAPI.DAL;
+using AlltBokatWebAPI.Models.ViewModels;
 
 namespace AlltBokatWebAPI.Controllers
 {
@@ -19,9 +20,13 @@ namespace AlltBokatWebAPI.Controllers
         private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: api/BookingModels
-        public IQueryable<BookingModels> GetBookings()
+        public IQueryable<BookingWithoutNavProp> GetBookings()
         {
-            return db.Bookings;
+            List<BookingWithoutNavProp> bookingList = BookingDAL.GetAllBookingsWithoutNavProps();
+
+            IQueryable<BookingWithoutNavProp> bookingListan = bookingList.AsQueryable();
+            return bookingListan;
+            //return db.Bookings.AsQueryable();
         }
 
         // GET: api/BookingModels/5
@@ -73,40 +78,53 @@ namespace AlltBokatWebAPI.Controllers
         }
 
         // POST: api/BookingModels
-        [ResponseType(typeof(BookingModels))]
-        public async Task<IHttpActionResult> PostBookingModels(BookingModels bookingModels, DateTime StartTime, DateTime EndTime)
+        [ResponseType(typeof(BookingWithTimeViewModel))]
+        public async Task<IHttpActionResult> PostBookingModels(BookingWithTimeViewModel BookingRequest)
         {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-            BookingTimeSlotModels TimeSloten = new BookingTimeSlotModels();
-            TimeSloten.startTime = StartTime;
-            TimeSloten.endTime = EndTime;
+            //if (!ModelState.IsValid)
+            //{
+            //    return BadRequest(ModelState);
+            //}
 
-            bookingModels.bookingTimeSlot = TimeSloten;
+            //var bookingTest = new BookingModels();
+
+            //bookingTest.ApplicationUserId = "3196ceac-7cb4-4ac1-8b16-cd0c0f12dd12";
+            //bookingTest.BookingTimeSlotModelsId = 4;
+            //bookingTest.CustomerEmail = "zajjmon01@gmail.com";
+            //bookingTest.CustomerName = "Simon";
+            //bookingTest.description = "test description";
+            //bookingTest.Id = 15;
+            //bookingTest.BookingTimeSlotModels = db.BookingTimeSlots.Find(4);
+            //bookingTest.ApplicationUser = db.Users.Find("3196ceac-7cb4-4ac1-8b16-cd0c0f12dd12");
+
+            
+            //db.Bookings.Add(bookingTest);
+            //await db.SaveChangesAsync();
+            
+
+
+            var booking = BookingRequest.BookingModel;
+            var timeSlot = BookingRequest.BookingTimeSlotModel;
+            
+            
+            
             try
             { 
-            db.Bookings.Add(bookingModels);
+            db.BookingTimeSlots.Add(timeSlot);
+
             await db.SaveChangesAsync();
+                booking.BookingTimeSlotModelsId = timeSlot.Id;
                 
 
 
 
-
-
-
-            db.Bookings.Add(bookingModels);
-            
-            
-          
-
-                
+            db.Bookings.Add(booking);
+                await db.SaveChangesAsync();
 
             }
             catch (DbUpdateException)
-            {                                     // fungerar denna OR-operand??
-                if (BookingModelsExists(bookingModels.Id))
+            {                                     
+                if (BookingModelsExists(booking.Id))
                 {
                     return Conflict();
                 }
@@ -117,7 +135,7 @@ namespace AlltBokatWebAPI.Controllers
                 
             }
 
-            return CreatedAtRoute("DefaultApi", new { id = bookingModels.Id }, bookingModels);
+            return CreatedAtRoute("DefaultApi", new { id = booking.Id }, booking);
         }
 
         // DELETE: api/BookingModels/5
@@ -151,7 +169,7 @@ namespace AlltBokatWebAPI.Controllers
         }
         private bool BookingTimeModelsExists(int id)
         {
-            return db.BookingTimeSlots.Count(e => e.bookingTimeSlotId == id) > 0;
+            return db.BookingTimeSlots.Count(e => e.Id == id) > 0;
         }
         private void SendBookingNotificationMail(BookingModels bookingModels, BookingTimeSlotModels bookingTimeSlotModels)
         {
