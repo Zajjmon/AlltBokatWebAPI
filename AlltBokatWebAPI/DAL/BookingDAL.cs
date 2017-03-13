@@ -38,7 +38,7 @@ namespace AlltBokatWebAPI.DAL
 {
     public static class BookingDAL
     {
-        public static List<BookingWithoutNavProp> GetAllBookingsWithoutNavProps()
+        public static IQueryable<BookingWithoutNavProp> GetAllBookingsWithoutNavProps()
         {
             using (var db = new ApplicationDbContext())
             {
@@ -63,7 +63,7 @@ namespace AlltBokatWebAPI.DAL
                     });
 
                 }
-                return returnableBookings;
+                return returnableBookings.AsQueryable();
             }
         }
     }

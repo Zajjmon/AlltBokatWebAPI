@@ -17,23 +17,36 @@ namespace AlltBokatWebAPI.Controllers
 {
     public class BookingModelsController : ApiController
     {
-        private ApplicationDbContext db = new ApplicationDbContext();
+        private IBookingRepository bookingRepository;
+
+        public BookingModelsController()
+        {
+            this.bookingRepository = new BookingRepository(new ApplicationDbContext());
+        }
+
+        public BookingModelsController(IBookingRepository bookingRepository)
+        {
+            this.bookingRepository = bookingRepository;
+        }
 
         // GET: api/BookingModels
+
         public IQueryable<BookingWithoutNavProp> GetBookings()
         {
-            List<BookingWithoutNavProp> bookingList = BookingDAL.GetAllBookingsWithoutNavProps();
 
-            IQueryable<BookingWithoutNavProp> bookingListan = bookingList.AsQueryable();
-            return bookingListan;
-            //return db.Bookings.AsQueryable();
+            return bookingRepository.GetBookings();
+           
         }
+
+
 
         // GET: api/BookingModels/5
         [ResponseType(typeof(BookingModels))]
         public async Task<IHttpActionResult> GetBookingModels(int id)
         {
-            BookingModels bookingModels = await db.Bookings.FindAsync(id);
+            //BookingModels bookingModels = await db.Bookings.FindAsync(id);
+            BookingModels bookingModels = await bookingRepository.GetBookingModelByIdAsync(id);
+
             if (bookingModels == null)
             {
                 return NotFound();
@@ -50,90 +63,42 @@ namespace AlltBokatWebAPI.Controllers
             {
                 return BadRequest(ModelState);
             }
+            BookingModels bookingModel = await bookingRepository.PutBookingModels(id, bookingModels);
 
-            if (id != bookingModels.Id)
-            {
-                return BadRequest();
-            }
-
-            db.Entry(bookingModels).State = EntityState.Modified;
-
-            try
-            {
-                await db.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!BookingModelsExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
-            return StatusCode(HttpStatusCode.NoContent);
+            return Ok(bookingModel);
         }
 
         // POST: api/BookingModels
-        [ResponseType(typeof(BookingWithTimeViewModel))]
-        public async Task<IHttpActionResult> PostBookingModels(BookingWithTimeViewModel BookingRequest)
+        [ResponseType(typeof(BookingRequest))]
+        public async Task<IHttpActionResult> PostBookingModels(BookingRequest bookingRequest)
         {
-            //if (!ModelState.IsValid)
-            //{
-            //    return BadRequest(ModelState);
+            //var booking = BookingRequest.BookingModel;
+            //var timeSlot = BookingRequest.BookingTimeSlotModel;
+
+            //try
+            //{ 
+            //db.BookingTimeSlots.Add(timeSlot);
+
+            //await db.SaveChangesAsync();
+            //    booking.BookingTimeSlotModelsId = timeSlot.Id;
+
+            //db.Bookings.Add(booking);
+            //    await db.SaveChangesAsync();
+
+            //}
+            //catch (DbUpdateException)
+            //{                                     
+            //    if (BookingModelsExists(booking.Id))
+            //    {
+            //        return Conflict();
+            //    }
+            //    else
+            //    {
+            //        throw;
+            //    }             
             //}
 
-            //var bookingTest = new BookingModels();
-
-            //bookingTest.ApplicationUserId = "3196ceac-7cb4-4ac1-8b16-cd0c0f12dd12";
-            //bookingTest.BookingTimeSlotModelsId = 4;
-            //bookingTest.CustomerEmail = "zajjmon01@gmail.com";
-            //bookingTest.CustomerName = "Simon";
-            //bookingTest.description = "test description";
-            //bookingTest.Id = 15;
-            //bookingTest.BookingTimeSlotModels = db.BookingTimeSlots.Find(4);
-            //bookingTest.ApplicationUser = db.Users.Find("3196ceac-7cb4-4ac1-8b16-cd0c0f12dd12");
-
-            
-            //db.Bookings.Add(bookingTest);
-            //await db.SaveChangesAsync();
-            
-
-
-            var booking = BookingRequest.BookingModel;
-            var timeSlot = BookingRequest.BookingTimeSlotModel;
-            
-            
-            
-            try
-            { 
-            db.BookingTimeSlots.Add(timeSlot);
-
-            await db.SaveChangesAsync();
-                booking.BookingTimeSlotModelsId = timeSlot.Id;
-                
-
-
-
-            db.Bookings.Add(booking);
-                await db.SaveChangesAsync();
-
-            }
-            catch (DbUpdateException)
-            {                                     
-                if (BookingModelsExists(booking.Id))
-                {
-                    return Conflict();
-                }
-                else
-                {
-                    throw;
-                }
-                
-            }
+            BookingModels booking = await bookingRepository.PostBookingModels(bookingRequest);
 
             return CreatedAtRoute("DefaultApi", new { id = booking.Id }, booking);
         }
@@ -142,35 +107,25 @@ namespace AlltBokatWebAPI.Controllers
         [ResponseType(typeof(BookingModels))]
         public async Task<IHttpActionResult> DeleteBookingModels(int id)
         {
-            BookingModels bookingModels = await db.Bookings.FindAsync(id);
+
+
+            BookingModels bookingModels = await bookingRepository.DeleteBookingModels(id);
             if (bookingModels == null)
             {
                 return NotFound();
             }
-
-            db.Bookings.Remove(bookingModels);
-            await db.SaveChangesAsync();
 
             return Ok(bookingModels);
         }
 
         protected override void Dispose(bool disposing)
         {
-            if (disposing)
-            {
-                db.Dispose();
-            }
+            bookingRepository.Dispose();
             base.Dispose(disposing);
         }
 
-        private bool BookingModelsExists(int id)
-        {
-            return db.Bookings.Count(e => e.Id == id) > 0;
-        }
-        private bool BookingTimeModelsExists(int id)
-        {
-            return db.BookingTimeSlots.Count(e => e.Id == id) > 0;
-        }
+        
+        
         private void SendBookingNotificationMail(BookingModels bookingModels, BookingTimeSlotModels bookingTimeSlotModels)
         {
             //MailTestKlass Mail = new MailTestKlass();
