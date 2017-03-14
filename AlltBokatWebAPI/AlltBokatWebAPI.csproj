@@ -220,8 +220,10 @@
     <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="DAL\BookingDAL.cs" />
     <Compile Include="DAL\BookingRepository.cs" />
+    <Compile Include="DAL\IApplicationUserRepository.cs" />
     <Compile Include="DAL\IBookingRepository.cs" />
-    <Compile Include="DAL\Users.cs" />
+    <Compile Include="DAL\ApplicationUserRepository.cs" />
+    <Compile Include="DAL\Services\ApplicationUserServices.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -245,6 +247,7 @@
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\MailTestKlassGMail.cs" />
     <Compile Include="Models\UserRatingModels.cs" />
+    <Compile Include="Models\ViewModels\ApplicationUserViewModels.cs" />
     <Compile Include="Models\ViewModels\BookingWithoutNavProp.cs" />
     <Compile Include="Models\ViewModels\BookingRequest.cs" />
     <Compile Include="Models\ViewModels\UserWithBookings.cs" />
