@@ -13,11 +13,17 @@ namespace AlltBokatWebAPI.Models
     {
         public virtual ICollection<BookingModels> Bookings { get; set; }
         public virtual ICollection<UserRatingModels> UserRatings { get; set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager, string authenticationType)
         {
             // Note the authenticationType must match the one defined in CookieAuthenticationOptions.AuthenticationType
             var userIdentity = await manager.CreateIdentityAsync(this, authenticationType);
             // Add custom user claims here
+            userIdentity.AddClaim(new Claim("FirstName", this.FirstName.ToString()));
+            userIdentity.AddClaim(new Claim("LastName", this.LastName.ToString()));
+
             return userIdentity;
         }
     }

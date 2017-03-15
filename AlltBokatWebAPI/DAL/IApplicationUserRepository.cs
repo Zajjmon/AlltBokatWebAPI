@@ -9,13 +9,13 @@ namespace AlltBokatWebAPI.DAL
 {
 
 
-    //Not implemented yet due to the use of static classes in ApplicationUserRepository, maybe later create an instans in the ApplicationUserController
+    
 
     public interface IApplicationUserRepository : IDisposable
     {
 
-        Task<string> GetApplicationUserNameById(string id);
-        Task<List<ApplicationUserInfoViewModel>> GetApplicationUserNames();
+        Task<ApplicationUserInfoViewModelWhithId> GetApplicationUserInfoById(string id);
+        Task<List<ApplicationUserInfoViewModelWhithId>> GetApplicationUserNames();
        
 
     }

@@ -13,19 +13,21 @@ namespace AlltBokatWebAPI.DAL.Services
         
         
         
-        //Converts a List of ApplicationUsers to  a list of ApplicationUserInfoViewModels
-        public List<ApplicationUserInfoViewModel> ConvertToApplicationUserInfoViewModel(List<ApplicationUser> FullUserList)
+        //Converts a List of ApplicationUsers to  a list of ApplicationUserInfoViewModels (A list of users with id)
+        public List<ApplicationUserInfoViewModelWhithId> ConvertToApplicationUserInfoViewModelWithId(List<ApplicationUser> FullUserList)
         {
-            var PartOfUserList = new List<ApplicationUserInfoViewModel>();
+            var PartOfUserList = new List<ApplicationUserInfoViewModelWhithId>();
 
 
             
              foreach (ApplicationUser item in FullUserList)
             {
-                ApplicationUserInfoViewModel user = new ApplicationUserInfoViewModel();
+                ApplicationUserInfoViewModelWhithId user = new ApplicationUserInfoViewModelWhithId();
                 user.Email = item.Email;
                 user.UserName = item.UserName;
-
+                user.FirstName = item.FirstName;
+                user.LastName = item.LastName;
+                user.Id = item.Id;
                 PartOfUserList.Add(user);
 
 
@@ -33,5 +35,47 @@ namespace AlltBokatWebAPI.DAL.Services
 
              return PartOfUserList;
         }
+
+
+
+        public ApplicationUserInfoViewModelWhithId ConvertToApplicationUserInfoViewModelWhitIdSingle(ApplicationUser User)
+        {
+
+
+
+
+
+            ApplicationUserInfoViewModelWhithId user = new ApplicationUserInfoViewModelWhithId();
+                user.Email = User.Email;
+                user.UserName = User.UserName;
+                user.Id = User.Id;
+               
+
+
+            
+
+            return user;
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     }
 }

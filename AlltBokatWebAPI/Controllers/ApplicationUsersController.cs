@@ -32,22 +32,24 @@ namespace AlltBokatWebAPI.Controllers
 
 
         // GET: api/ApplicationUsers
-        public async Task <List<ApplicationUserInfoViewModel>> Get()
+        //Returns a list of users exluding Id
+        public async Task <List<ApplicationUserInfoViewModelWhithId>> Get()
         {
-            List<ApplicationUserInfoViewModel> userList =await  ApplicationUserRepository.GetApplicationUserNames();
+            List<ApplicationUserInfoViewModelWhithId> userList =await  ApplicationUserRepository.GetApplicationUserNames();
 
             return userList;
         }
 
-        // GET: api/ApplicationUsers/5
-        public async Task <ApplicationUser> Get(string id)
+        // GET: api/ApplicationUsers/5 
+        //Returns a users info including id
+        public async Task <ApplicationUserInfoViewModelWhithId> Get(string id)
         {
+            
+            var SingleUserInfoWithId =  await ApplicationUserRepository.GetApplicationUserInfoById(id);
+            
+            
 
-            string userName =  await ApplicationUserRepository.GetApplicationUserNameById(id);
-            ApplicationUser usr = new ApplicationUser();
-            usr.UserName = userName;
-
-            return usr;
+            return SingleUserInfoWithId;
         }
 
         // POST: api/ApplicationUsers
@@ -58,6 +60,10 @@ namespace AlltBokatWebAPI.Controllers
         // PUT: api/ApplicationUsers/5
         public void Put(int id, [FromBody]string value)
         {
+            
+            
+
+
         }
 
         // DELETE: api/ApplicationUsers/5

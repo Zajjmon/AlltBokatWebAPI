@@ -29,22 +29,23 @@ namespace AlltBokatWebAPI.DAL
 
 
 
-        public async Task<string> GetApplicationUserNameById(string id)
+        public async Task<ApplicationUserInfoViewModelWhithId> GetApplicationUserInfoById(string id)
         {
             using (context)
             {
                 ApplicationUser user = await UserManager.FindByIdAsync(id);
+                ApplicationUserInfoViewModelWhithId userInfo = ApplicationUserServices.ConvertToApplicationUserInfoViewModelWhitIdSingle(user);
+
+
 
                 
-                
-                string usrName = user.UserName;
-                return usrName;
+                return userInfo;
             }
         }
 
 
 
-        public async Task<List<ApplicationUserInfoViewModel>> GetApplicationUserNames()
+        public async Task<List<ApplicationUserInfoViewModelWhithId>> GetApplicationUserNames()
         {
             using (context)
             {
@@ -52,8 +53,8 @@ namespace AlltBokatWebAPI.DAL
                 
                  var FullList =await UserManager.Users.ToListAsync();
 
-                List<ApplicationUserInfoViewModel> usrList = new List<ApplicationUserInfoViewModel>();
-                usrList = ApplicationUserServices.ConvertToApplicationUserInfoViewModel(FullList);
+                List<ApplicationUserInfoViewModelWhithId> usrList = new List<ApplicationUserInfoViewModelWhithId>();
+                usrList = ApplicationUserServices.ConvertToApplicationUserInfoViewModelWithId(FullList);
 
 
 

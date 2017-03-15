@@ -224,6 +224,7 @@
     <Compile Include="DAL\IBookingRepository.cs" />
     <Compile Include="DAL\ApplicationUserRepository.cs" />
     <Compile Include="DAL\Services\ApplicationUserServices.cs" />
+    <Compile Include="Extensions\IdentityExtensions.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -238,6 +239,10 @@
     <Compile Include="Migrations\201703081424250_y.cs" />
     <Compile Include="Migrations\201703081424250_y.Designer.cs">
       <DependentUpon>201703081424250_y.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201703151005189_newProp.cs" />
+    <Compile Include="Migrations\201703151005189_newProp.Designer.cs">
+      <DependentUpon>201703151005189_newProp.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountBindingModels.cs" />
@@ -333,6 +338,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201703081424250_y.resx">
       <DependentUpon>201703081424250_y.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201703151005189_newProp.resx">
+      <DependentUpon>201703151005189_newProp.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
