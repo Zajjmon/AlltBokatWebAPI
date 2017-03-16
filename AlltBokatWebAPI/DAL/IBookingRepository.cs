@@ -16,7 +16,7 @@ namespace AlltBokatWebAPI.DAL
         Task<BookingModels> PutBookingModels(int id, BookingModels bookingModels);
         Task<BookingModels> PostBookingModels(BookingRequest BookingRequest);
         Task<BookingModels> DeleteBookingModels(int id);
-
+        IQueryable<BookingWithoutNavProp> GetBookingsByApplicationUserId(string Id);
 
     }
 }

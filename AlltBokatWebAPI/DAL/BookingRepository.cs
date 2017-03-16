@@ -8,6 +8,7 @@ using AlltBokatWebAPI.Models;
 using AlltBokatWebAPI.Models.ViewModels;
 using System.Data.Entity.Infrastructure;
 using System.Data.Entity;
+using AlltBokatWebAPI.DAL.Services;
 
 namespace AlltBokatWebAPI.DAL
 {
@@ -15,10 +16,12 @@ namespace AlltBokatWebAPI.DAL
     {
 
         private ApplicationDbContext context;
+        private BookingServices BookingServices;
 
         public BookingRepository(ApplicationDbContext context)
         {
             this.context = context;
+            BookingServices = new BookingServices();
         }
 
         public async Task<BookingModels> DeleteBookingModels(int id)
@@ -30,19 +33,19 @@ namespace AlltBokatWebAPI.DAL
             context.Bookings.Remove(bookingModels);
             await context.SaveChangesAsync();
             return bookingModels;
-            
+
         }
 
         public async Task<BookingModels> GetBookingModelByIdAsync(int id)
         {
             BookingModels bookingModels = await context.Bookings.FindAsync(id);
-            
+
             return bookingModels;
         }
 
         public IQueryable<BookingWithoutNavProp> GetBookings()
         {
-            
+
             return BookingDAL.GetAllBookingsWithoutNavProps();
         }
 
@@ -70,7 +73,7 @@ namespace AlltBokatWebAPI.DAL
                 throw;
             }
 
-           
+
         }
 
         public async Task<BookingModels> PutBookingModels(int id, BookingModels bookingModels)
@@ -87,7 +90,7 @@ namespace AlltBokatWebAPI.DAL
             {
                 throw;
             }
-            
+
         }
 
         private bool disposed = false;
@@ -109,6 +112,48 @@ namespace AlltBokatWebAPI.DAL
             Dispose(true);
             GC.SuppressFinalize(this);
         }
+
+
+
+
+        //Returns a list of bookingsWithOutNavProp 
+        public IQueryable<BookingWithoutNavProp> GetBookingsByApplicationUserId(string IdByParameter)
+        {
+            List<BookingWithoutNavProp> BookingListWithoutNavProp = new List<BookingWithoutNavProp>();
+
+            using (context)
+            {
+
+
+                IQueryable<BookingModels> bookings = context.Bookings.Where(b => b.ApplicationUserId == IdByParameter).AsQueryable();
+                BookingListWithoutNavProp = BookingServices.ConvertToBookingWithoutNavProps(bookings);
+
+
+
+            }
+            return BookingListWithoutNavProp.AsQueryable();
+
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
     }
