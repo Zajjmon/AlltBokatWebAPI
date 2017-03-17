@@ -9,6 +9,7 @@ using AlltBokatWebAPI.Models.ViewModels;
 using System.Data.Entity.Infrastructure;
 using System.Data.Entity;
 using AlltBokatWebAPI.DAL.Services;
+using static AlltBokatWebAPI.Models.ViewModels.BookingViewModels;
 
 namespace AlltBokatWebAPI.DAL
 {
@@ -43,11 +44,50 @@ namespace AlltBokatWebAPI.DAL
             return bookingModels;
         }
 
-        public IQueryable<BookingWithoutNavProp> GetBookings()
-        {
+        
 
-            return BookingDAL.GetAllBookingsWithoutNavProps();
+       
+           //Returns all bookings
+        public IQueryable<BookingInfoViewModelWithId> GetBookings()
+        {
+            List<BookingInfoViewModelWithId> BookingListWithoutNavProp = new List<BookingInfoViewModelWithId>();
+            try
+            {
+                using (context)
+                {
+
+                    IQueryable<BookingModels> bookings = context.Bookings.AsQueryable(); 
+                    BookingListWithoutNavProp = BookingServices.ConvertToBookingWithoutNavProps(bookings);
+
+                }
+                return BookingListWithoutNavProp.AsQueryable();
+            }
+            catch (DbUpdateException)
+            {
+                return null;
+                throw;
+            }
         }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
         public async Task<BookingModels> PostBookingModels(BookingRequest bookingRequest)
         {
@@ -116,23 +156,26 @@ namespace AlltBokatWebAPI.DAL
 
 
 
-        //Returns a list of bookingsWithOutNavProp 
-        public IQueryable<BookingWithoutNavProp> GetBookingsByApplicationUserId(string IdByParameter)
+        //Returns a list of bookingsWithOutNavProp depending on aplication user
+        public IQueryable<BookingInfoViewModelWithId> GetBookingsByApplicationUserId(string IdByParameter)
         {
-            List<BookingWithoutNavProp> BookingListWithoutNavProp = new List<BookingWithoutNavProp>();
-
-            using (context)
+            List<BookingInfoViewModelWithId> BookingListWithoutNavProp = new List<BookingInfoViewModelWithId>();
+            try
             {
+                using (context)
+            {
+                
+                    IQueryable<BookingModels> bookings = context.Bookings.Where(b => b.ApplicationUserId == IdByParameter).AsQueryable();
+                    BookingListWithoutNavProp = BookingServices.ConvertToBookingWithoutNavProps(bookings);
 
-
-                IQueryable<BookingModels> bookings = context.Bookings.Where(b => b.ApplicationUserId == IdByParameter).AsQueryable();
-                BookingListWithoutNavProp = BookingServices.ConvertToBookingWithoutNavProps(bookings);
-
-
-
-            }
+                }
             return BookingListWithoutNavProp.AsQueryable();
-
+            }
+             catch (DbUpdateException)
+            {
+                return null;
+                throw;
+            }
         }
 
 

@@ -32,24 +32,20 @@ namespace AlltBokatWebAPI.Controllers
 
 
         // GET: api/ApplicationUsers
-        //Returns a list of users exluding Id
+        //Returns a list of users with Id
         public async Task <List<ApplicationUserInfoViewModelWhithId>> Get()
         {
-            List<ApplicationUserInfoViewModelWhithId> userList =await  ApplicationUserRepository.GetApplicationUserNames();
-
-            return userList;
+            
+            return await ApplicationUserRepository.GetApplicationUserNames();
         }
 
         // GET: api/ApplicationUsers/5 
         //Returns a users info including id
         public async Task <ApplicationUserInfoViewModelWhithId> Get(string id)
         {
-            
-            var SingleUserInfoWithId =  await ApplicationUserRepository.GetApplicationUserInfoById(id);
-            
-            
+              
 
-            return SingleUserInfoWithId;
+            return await ApplicationUserRepository.GetApplicationUserInfoById(id); ;
         }
 
         // POST: api/ApplicationUsers

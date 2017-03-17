@@ -12,7 +12,7 @@ using System.Web.Http.Description;
 using AlltBokatWebAPI.Models;
 using AlltBokatWebAPI.DAL;
 using AlltBokatWebAPI.Models.ViewModels;
-
+using static AlltBokatWebAPI.Models.ViewModels.BookingViewModels;
 
 namespace AlltBokatWebAPI.Controllers
 {
@@ -34,10 +34,11 @@ namespace AlltBokatWebAPI.Controllers
 
         //tex: api/ApplicationUserBookings/14290799-13b1-4985-9a72-3fc6666cbfdb Returns the bookings thats connected to a Applicationuser
 
-        public IQueryable<BookingWithoutNavProp> GetBookingModelsByUserId(string Id)
+        public async Task<List <BookingInfoViewModelWithId>> GetBookingModelsByUserId(string Id)
         {
-            IQueryable<BookingWithoutNavProp> BookingWithoutNavPropList = bookingRepository.GetBookingsByApplicationUserId(Id);
-            return BookingWithoutNavPropList;
+            //IQueryable<BookingInfoViewModel> BookingWithoutNavPropList = bookingRepository.GetBookingsByApplicationUserId(Id);
+            //return BookingWithoutNavPropList;
+            return await bookingRepository.GetBookingsByApplicationUserId(Id).ToListAsync();
 
         }
 

@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using static AlltBokatWebAPI.Models.ViewModels.BookingViewModels;
 
 namespace AlltBokatWebAPI.DAL.Services
 {
@@ -12,9 +13,9 @@ namespace AlltBokatWebAPI.DAL.Services
 
 
         //Converts a List of BookingModels to  a list of BookingsWithoutNavProps 
-        public List<BookingWithoutNavProp> ConvertToBookingWithoutNavProps(IQueryable<BookingModels> x)
+        public List<BookingInfoViewModelWithId> ConvertToBookingWithoutNavProps(IQueryable<BookingModels> x)
         {
-            var BookingWithoutNavPropBookingList = new List<BookingWithoutNavProp>();
+            var BookingInfoViewModelWithIdList = new List<BookingInfoViewModelWithId>();
 
             var FullBookingList= x.ToList();
 
@@ -22,24 +23,24 @@ namespace AlltBokatWebAPI.DAL.Services
             foreach (BookingModels item in FullBookingList)
             {
 
-                BookingWithoutNavProp bookingWithOutNavProp = new BookingWithoutNavProp();
+                BookingInfoViewModelWithId BookingInfoViewModelWithId = new BookingInfoViewModelWithId();
 
 
 
-                bookingWithOutNavProp.Id = item.BookingTimeSlotModels.Id;
-                bookingWithOutNavProp.ApplicationUserId = item.ApplicationUserId;
-                bookingWithOutNavProp.CustomerEmail = item.CustomerEmail;
-                bookingWithOutNavProp.CustomerName = item.CustomerName;
-                bookingWithOutNavProp.description = item.description;
-                bookingWithOutNavProp.startTime = item.BookingTimeSlotModels.startTime;
-                bookingWithOutNavProp.endTime = item.BookingTimeSlotModels.endTime;
-                bookingWithOutNavProp.UserName = item.ApplicationUser.UserName;
-                BookingWithoutNavPropBookingList.Add(bookingWithOutNavProp);
+                BookingInfoViewModelWithId.Id = item.BookingTimeSlotModels.Id;
+                BookingInfoViewModelWithId.ApplicationUserId = item.ApplicationUserId;
+                BookingInfoViewModelWithId.CustomerEmail = item.CustomerEmail;
+                BookingInfoViewModelWithId.CustomerName = item.CustomerName;
+                BookingInfoViewModelWithId.description = item.description;
+                BookingInfoViewModelWithId.startTime = item.BookingTimeSlotModels.startTime;
+                BookingInfoViewModelWithId.endTime = item.BookingTimeSlotModels.endTime;
+                BookingInfoViewModelWithId.UserName = item.ApplicationUser.UserName;
+                BookingInfoViewModelWithIdList.Add(BookingInfoViewModelWithId);
 
 
             }
 
-            return BookingWithoutNavPropBookingList;
+            return BookingInfoViewModelWithIdList;
         }
 
 

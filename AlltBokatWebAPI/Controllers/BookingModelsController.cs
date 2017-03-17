@@ -12,6 +12,7 @@ using System.Web.Http.Description;
 using AlltBokatWebAPI.Models;
 using AlltBokatWebAPI.DAL;
 using AlltBokatWebAPI.Models.ViewModels;
+using static AlltBokatWebAPI.Models.ViewModels.BookingViewModels;
 
 namespace AlltBokatWebAPI.Controllers
 {
@@ -31,7 +32,7 @@ namespace AlltBokatWebAPI.Controllers
 
         // GET: api/BookingModels
 
-        public IQueryable<BookingWithoutNavProp> GetBookings()
+        public IQueryable<BookingInfoViewModelWithId> GetBookings()
         {
 
             return bookingRepository.GetBookings();

@@ -219,7 +219,6 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\UserRatingModelsController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
-    <Compile Include="DAL\BookingDAL.cs" />
     <Compile Include="DAL\BookingRepository.cs" />
     <Compile Include="DAL\IApplicationUserRepository.cs" />
     <Compile Include="DAL\IBookingRepository.cs" />
@@ -255,7 +254,7 @@
     <Compile Include="Models\MailTestKlassGMail.cs" />
     <Compile Include="Models\UserRatingModels.cs" />
     <Compile Include="Models\ViewModels\ApplicationUserViewModels.cs" />
-    <Compile Include="Models\ViewModels\BookingWithoutNavProp.cs" />
+    <Compile Include="Models\ViewModels\BookingViewModels.cs" />
     <Compile Include="Models\ViewModels\BookingRequest.cs" />
     <Compile Include="Models\ViewModels\UserWithBookings.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
