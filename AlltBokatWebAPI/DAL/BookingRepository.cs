@@ -70,7 +70,13 @@ namespace AlltBokatWebAPI.DAL
         }
 
 
+        public async Task<BookingInfoViewModelWithId> GetSingleBooking(int id)
+        {
+            var bookingModel = await context.Bookings.FindAsync(id);
+            var singleBooking = BookingServices.ConvertToSingleBookingInfoViewModelWithId(bookingModel);
+            return singleBooking;
 
+        }
 
 
 

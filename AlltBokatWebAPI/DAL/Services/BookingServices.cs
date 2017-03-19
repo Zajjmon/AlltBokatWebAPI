@@ -43,7 +43,24 @@ namespace AlltBokatWebAPI.DAL.Services
             return BookingInfoViewModelWithIdList;
         }
 
+        public BookingInfoViewModelWithId ConvertToSingleBookingInfoViewModelWithId(BookingModels bookingModel)
+        {
+            
+            var singleBooking = new BookingInfoViewModelWithId
+            {
+                Id = bookingModel.Id,
+                ApplicationUserId = bookingModel.ApplicationUserId,
+                CustomerEmail = bookingModel.CustomerEmail,
+                CustomerName = bookingModel.CustomerName,
+                description = bookingModel.description,
+                startTime = bookingModel.BookingTimeSlotModels.startTime,
+                endTime = bookingModel.BookingTimeSlotModels.endTime,
+                UserName = bookingModel.ApplicationUser.UserName
 
+            };
+            return singleBooking;
+
+        }
 
 
 

@@ -18,6 +18,7 @@ namespace AlltBokatWebAPI.DAL
         Task<BookingModels> PostBookingModels(BookingRequest BookingRequest);
         Task<BookingModels> DeleteBookingModels(int id);
         IQueryable<BookingInfoViewModelWithId> GetBookingsByApplicationUserId(string Id);
+        Task<BookingInfoViewModelWithId> GetSingleBooking(int id);
 
     }
 }
