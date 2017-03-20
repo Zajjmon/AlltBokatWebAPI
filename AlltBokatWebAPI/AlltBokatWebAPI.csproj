@@ -263,10 +263,6 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="App_Data\aspnet-AlltBokatWebAPI-20170301020446.mdf" />
-    <Content Include="App_Data\aspnet-AlltBokatWebAPI-20170301020446_log.ldf">
-      <DependentUpon>aspnet-AlltBokatWebAPI-20170301020446.mdf</DependentUpon>
-    </Content>
     <Content Include="Areas\HelpPage\HelpPage.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
@@ -322,6 +318,7 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="App_Data\" />
     <Folder Include="Views\ApplicationUserBookings\" />
   </ItemGroup>
   <ItemGroup>

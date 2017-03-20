@@ -80,21 +80,6 @@ namespace AlltBokatWebAPI.DAL
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
         public async Task<BookingModels> PostBookingModels(BookingRequest bookingRequest)
         {
             var booking = bookingRequest.BookingModel;
