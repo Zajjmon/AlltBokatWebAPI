@@ -237,13 +237,13 @@
     <Compile Include="Migrations\201703091307294_GetBookingsWithoutNavProps.Designer.cs">
       <DependentUpon>201703091307294_GetBookingsWithoutNavProps.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201703081424250_y.cs" />
-    <Compile Include="Migrations\201703081424250_y.Designer.cs">
-      <DependentUpon>201703081424250_y.cs</DependentUpon>
-    </Compile>
     <Compile Include="Migrations\201703151005189_newProp.cs" />
     <Compile Include="Migrations\201703151005189_newProp.Designer.cs">
       <DependentUpon>201703151005189_newProp.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201703211026365_SQLScriptBookingWithinTimeRange.cs" />
+    <Compile Include="Migrations\201703211026365_SQLScriptBookingWithinTimeRange.Designer.cs">
+      <DependentUpon>201703211026365_SQLScriptBookingWithinTimeRange.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountBindingModels.cs" />
@@ -336,11 +336,11 @@
     <EmbeddedResource Include="Migrations\201703091307294_GetBookingsWithoutNavProps.resx">
       <DependentUpon>201703091307294_GetBookingsWithoutNavProps.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201703081424250_y.resx">
-      <DependentUpon>201703081424250_y.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201703151005189_newProp.resx">
       <DependentUpon>201703151005189_newProp.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201703211026365_SQLScriptBookingWithinTimeRange.resx">
+      <DependentUpon>201703211026365_SQLScriptBookingWithinTimeRange.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

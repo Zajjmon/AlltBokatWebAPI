@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AlltBokatWebAPI.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -16,7 +17,10 @@ namespace AlltBokatWebAPI.DAL
 
         Task<ApplicationUserInfoViewModelWhithId> GetApplicationUserInfoById(string id);
         Task<List<ApplicationUserInfoViewModelWhithId>> GetApplicationUserNames();
-       
+        Task<List<ApplicationUser>> GetUsersWithBookingWithinTimeRange(DateTime startTime, DateTime endTime);
+        Task<List<ApplicationUser>> GetUsersWithBookingNOTWithinTimeRange(DateTime startTime, DateTime endTime);
+
+
 
     }
 

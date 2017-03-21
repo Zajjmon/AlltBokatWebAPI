@@ -29,7 +29,11 @@ namespace AlltBokatWebAPI.Controllers
 
 
 
-
+        //public async Task<List<ApplicationUserInfoViewModelWhithId>> GetGetUsersWithBookingWithinTimeRange(DateTime startTime, DateTime endTime)
+        //{
+        //    var asd = await ApplicationUserRepository.GetUsersWithBookingWithinTimeRange(startTime, endTime);
+        //    var dsa = 
+        //}
 
         // GET: api/ApplicationUsers
         //Returns a list of users with Id
