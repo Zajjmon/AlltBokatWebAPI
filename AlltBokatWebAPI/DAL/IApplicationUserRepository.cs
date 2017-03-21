@@ -9,14 +9,14 @@ namespace AlltBokatWebAPI.DAL
 {
 
 
-    
+
 
     public interface IApplicationUserRepository : IDisposable
     {
 
         Task<ApplicationUserInfoViewModelWhithId> GetApplicationUserInfoById(string id);
         Task<List<ApplicationUserInfoViewModelWhithId>> GetApplicationUserNames();
-       
+
 
     }
 
