@@ -45,15 +45,19 @@ namespace AlltBokatWebAPI.Controllers
         [ResponseType(typeof(BookingModels))]
         public async Task<IHttpActionResult> GetBookingModels(int id)
         {
-            //BookingModels bookingModels = await db.Bookings.FindAsync(id);
-            BookingModels bookingModels = await bookingRepository.GetBookingModelByIdAsync(id);
+            var singleBooking = await bookingRepository.GetSingleBooking(id);
 
-            if (bookingModels == null)
-            {
-                return NotFound();
-            }
+            return Ok(singleBooking);
 
-            return Ok(bookingModels);
+            ////BookingModels bookingModels = await db.Bookings.FindAsync(id);
+            //BookingModels bookingModels = await bookingRepository.GetBookingModelByIdAsync(id);
+
+            //if (bookingModels == null)
+            //{
+            //    return NotFound();
+            //}
+
+            //return Ok(bookingModels);
         }
 
         // PUT: api/BookingModels/5
