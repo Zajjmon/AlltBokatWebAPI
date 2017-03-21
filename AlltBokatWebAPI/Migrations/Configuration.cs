@@ -51,14 +51,14 @@ namespace AlltBokatWebAPI.Migrations
             var bookingTimeSlot1 = new BookingTimeSlotModels
             {
                 
-                endTime = new DateTime(2017, 3, 22, 10, 0, 0),
-                startTime = new DateTime(2017, 3, 22, 11, 0, 0)
+                startTime = new DateTime(2017, 3, 22, 10, 0, 0),
+                endTime = new DateTime(2017, 3, 22, 11, 0, 0)
             };
             var bookingTimeSlot2 = new BookingTimeSlotModels
             {
 
-                endTime = new DateTime(2017, 3, 23, 8, 0, 0),
-                startTime = new DateTime(2017, 3, 23, 9, 0, 0)
+                startTime = new DateTime(2017, 3, 23, 8, 0, 0),
+                endTime = new DateTime(2017, 3, 23, 9, 0, 0)
             };
             context.BookingTimeSlots.Add(bookingTimeSlot1);
             context.BookingTimeSlots.Add(bookingTimeSlot2);
@@ -94,14 +94,14 @@ namespace AlltBokatWebAPI.Migrations
             var bookingTimeSlot1 = new BookingTimeSlotModels
             {
 
-                endTime = new DateTime(2017, 3, 24, 15, 0, 0),
-                startTime = new DateTime(2017, 3, 24, 16, 0, 0)
+                startTime = new DateTime(2017, 3, 24, 15, 0, 0),
+                endTime = new DateTime(2017, 3, 24, 16, 0, 0)
             };
             var bookingTimeSlot2 = new BookingTimeSlotModels
             {
 
-                endTime = new DateTime(2017, 3, 23, 14, 0, 0),
-                startTime = new DateTime(2017, 3, 23, 15, 0, 0)
+                startTime = new DateTime(2017, 3, 23, 14, 0, 0),
+                endTime = new DateTime(2017, 3, 23, 15, 0, 0)
             };
             context.BookingTimeSlots.Add(bookingTimeSlot1);
             context.BookingTimeSlots.Add(bookingTimeSlot2);
@@ -137,14 +137,14 @@ namespace AlltBokatWebAPI.Migrations
             var bookingTimeSlot1 = new BookingTimeSlotModels
             {
 
-                endTime = new DateTime(2017, 3, 24, 13, 0, 0),
-                startTime = new DateTime(2017, 3, 24, 14, 0, 0)
+                startTime = new DateTime(2017, 3, 24, 13, 0, 0),
+                endTime = new DateTime(2017, 3, 24, 14, 0, 0)
             };
             var bookingTimeSlot2 = new BookingTimeSlotModels
             {
 
-                endTime = new DateTime(2017, 3, 23, 10, 0, 0),
-                startTime = new DateTime(2017, 3, 23, 11, 0, 0)
+                startTime = new DateTime(2017, 3, 23, 10, 0, 0),
+                endTime = new DateTime(2017, 3, 23, 11, 0, 0)
             };
             context.BookingTimeSlots.Add(bookingTimeSlot1);
             context.BookingTimeSlots.Add(bookingTimeSlot2);
@@ -180,14 +180,14 @@ namespace AlltBokatWebAPI.Migrations
             var bookingTimeSlot1 = new BookingTimeSlotModels
             {
 
-                endTime = new DateTime(2017, 3, 28, 11, 0, 0),
-                startTime = new DateTime(2017, 3, 24, 12, 0, 0)
+                startTime = new DateTime(2017, 3, 28, 11, 0, 0),
+                endTime = new DateTime(2017, 3, 24, 12, 0, 0)
             };
             var bookingTimeSlot2 = new BookingTimeSlotModels
             {
 
-                endTime = new DateTime(2017, 3, 26, 12, 0, 0),
-                startTime = new DateTime(2017, 3, 23, 13, 0, 0)
+                startTime = new DateTime(2017, 3, 26, 12, 0, 0),
+                endTime = new DateTime(2017, 3, 23, 13, 0, 0)
             };
             context.BookingTimeSlots.Add(bookingTimeSlot1);
             context.BookingTimeSlots.Add(bookingTimeSlot2);

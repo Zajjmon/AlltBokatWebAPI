@@ -7,13 +7,13 @@ namespace AlltBokatWebAPI.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class y : IMigrationMetadata
+    public sealed partial class SQLScriptBookingWithinTimeRange : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(y));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(SQLScriptBookingWithinTimeRange));
         
         string IMigrationMetadata.Id
         {
-            get { return "201703081424250_y"; }
+            get { return "201703211026365_SQLScriptBookingWithinTimeRange"; }
         }
         
         string IMigrationMetadata.Source

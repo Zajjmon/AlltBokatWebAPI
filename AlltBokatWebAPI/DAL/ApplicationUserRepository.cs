@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity;
 using System.Data.Entity;
+using System.Data.SqlClient;
 
 namespace AlltBokatWebAPI.DAL
 {
@@ -27,7 +28,7 @@ namespace AlltBokatWebAPI.DAL
         }
 
 
-
+        
 
         public async Task<ApplicationUserInfoViewModelWhithId> GetApplicationUserInfoById(string id)
         {
@@ -84,6 +85,16 @@ namespace AlltBokatWebAPI.DAL
             GC.SuppressFinalize(this);
         }
 
+        public async Task<List<ApplicationUser>> GetUsersWithBookingWithinTimeRange(DateTime startTime, DateTime endTime)
+        {
+            List<ApplicationUser> users = await context.Database.SqlQuery<ApplicationUser>("dbo.SelectUsersWithBookingWithinTimeRange @inputStartTime, @inputEndTime", new SqlParameter("@inputStartTime", startTime), new SqlParameter("@inputEndTime", endTime)).ToListAsync();
+            return users;
+        }
 
+        public async Task<List<ApplicationUser>> GetUsersWithBookingNOTWithinTimeRange(DateTime startTime, DateTime endTime)
+        {
+            List<ApplicationUser> users = await context.Database.SqlQuery<ApplicationUser>("dbo.SelectUsersWithBookingNOTWithinTimeRange @inputStartTime, @inputEndTime", new SqlParameter("@inputStartTime", startTime), new SqlParameter("@inputEndTime", endTime)).ToListAsync();
+            return users;
+        }
     }
 }
