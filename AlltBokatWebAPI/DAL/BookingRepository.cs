@@ -15,6 +15,16 @@ namespace AlltBokatWebAPI.DAL
 {
     public class BookingRepository : IBookingRepository, IDisposable
     {
+        public class bookingdto
+        {
+            public int bookingId { get; set; }
+            public string description { get; set; }
+            public DateTime startTime { get; set; }
+            public string UserId { get; set; }
+
+
+
+        }
 
         private ApplicationDbContext context;
         private BookingServices BookingServices;
@@ -25,16 +35,44 @@ namespace AlltBokatWebAPI.DAL
             BookingServices = new BookingServices();
         }
 
+
         public async Task<BookingModels> DeleteBookingModels(int id)
         {
             BookingModels bookingModels = await context.Bookings.FindAsync(id);
+            BookingTimeSlotModels bookingTimeSlotModel = await context.BookingTimeSlots.FindAsync(bookingModels.BookingTimeSlotModelsId);
             if (bookingModels == null)
                 return null;
 
             context.Bookings.Remove(bookingModels);
+            context.BookingTimeSlots.Remove(bookingTimeSlotModel);
             await context.SaveChangesAsync();
             return bookingModels;
 
+        }
+        public IQueryable <BookingModels> getbookingdto()
+        {
+            var bookingdtos = context.Bookings
+                           .Where(p => p.description == "asd")
+                           .Select(p => new BookingModels()
+                           {
+                               Id = p.Id,
+                               description = p.description,
+                               BookingTimeSlotModels = p.BookingTimeSlotModels,
+                               ApplicationUserId = p.ApplicationUser.Id,
+                               ApplicationUser = new ApplicationUser()
+                               {
+                                   FirstName  = p.ApplicationUser.FirstName,
+                                   LastName = p.ApplicationUser.LastName
+                                   
+                               }
+                               
+                               
+                               
+                               
+
+                           });
+
+            return bookingdtos;
         }
 
         public async Task<BookingModels> GetBookingModelByIdAsync(int id)
@@ -50,6 +88,8 @@ namespace AlltBokatWebAPI.DAL
            //Returns all bookings
         public IQueryable<BookingInfoViewModelWithId> GetBookings()
         {
+
+            
             List<BookingInfoViewModelWithId> BookingListWithoutNavProp = new List<BookingInfoViewModelWithId>();
             try
             {
@@ -82,15 +122,17 @@ namespace AlltBokatWebAPI.DAL
 
         public async Task<BookingModels> PostBookingModels(BookingRequest bookingRequest)
         {
+
+            
             var booking = bookingRequest.BookingModel;
-            var timeSlot = bookingRequest.BookingTimeSlotModel;
+          //  var timeSlot = bookingRequest.BookingTimeSlotModel;
 
             try
             {
-                context.BookingTimeSlots.Add(timeSlot);
+                //context.BookingTimeSlots.Add(timeSlot);
 
-                await context.SaveChangesAsync();
-                booking.BookingTimeSlotModelsId = timeSlot.Id;
+                //await context.SaveChangesAsync();
+                //booking.BookingTimeSlotModelsId = timeSlot.Id;
 
                 context.Bookings.Add(booking);
                 await context.SaveChangesAsync();

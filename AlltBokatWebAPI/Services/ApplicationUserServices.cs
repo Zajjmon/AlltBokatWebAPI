@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using System.Web;
 using static AlltBokatWebAPI.Models.ViewModels.ApplicationUserViewModels;
 
-namespace AlltBokatWebAPI.DAL.Services
+namespace AlltBokatWebAPI.Services
 {
     public class ApplicationUserServices
     { 

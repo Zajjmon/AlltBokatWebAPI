@@ -223,8 +223,8 @@
     <Compile Include="DAL\IApplicationUserRepository.cs" />
     <Compile Include="DAL\IBookingRepository.cs" />
     <Compile Include="DAL\ApplicationUserRepository.cs" />
-    <Compile Include="DAL\Services\ApplicationUserServices.cs" />
-    <Compile Include="DAL\Services\BookingServices.cs" />
+    <Compile Include="Services\ApplicationUserServices.cs" />
+    <Compile Include="Services\BookingServices.cs" />
     <Compile Include="Extensions\IdentityExtensions.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -260,6 +260,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Providers\ApplicationOAuthProvider.cs" />
     <Compile Include="Results\ChallengeResult.cs" />
+    <Compile Include="Services\BookingServicesBase.cs" />
+    <Compile Include="Services\DTOs\ApplicationUserDTOs.cs" />
+    <Compile Include="Services\DTOs\BookingDTOs.cs" />
+    <Compile Include="Services\IBookingServices.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>

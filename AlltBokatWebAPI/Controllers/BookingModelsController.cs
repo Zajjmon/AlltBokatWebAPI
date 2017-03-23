@@ -42,7 +42,7 @@ namespace AlltBokatWebAPI.Controllers
 
 
         // GET: api/BookingModels/5
-        [ResponseType(typeof(BookingModels))]
+        [ResponseType(typeof(BookingInfoViewModelWithId))]
         public async Task<IHttpActionResult> GetBookingModels(int id)
         {
             var singleBooking = await bookingRepository.GetSingleBooking(id);
@@ -77,31 +77,7 @@ namespace AlltBokatWebAPI.Controllers
         [ResponseType(typeof(BookingRequest))]
         public async Task<IHttpActionResult> PostBookingModels(BookingRequest bookingRequest)
         {
-            //var booking = BookingRequest.BookingModel;
-            //var timeSlot = BookingRequest.BookingTimeSlotModel;
-
-            //try
-            //{ 
-            //db.BookingTimeSlots.Add(timeSlot);
-
-            //await db.SaveChangesAsync();
-            //    booking.BookingTimeSlotModelsId = timeSlot.Id;
-
-            //db.Bookings.Add(booking);
-            //    await db.SaveChangesAsync();
-
-            //}
-            //catch (DbUpdateException)
-            //{                                     
-            //    if (BookingModelsExists(booking.Id))
-            //    {
-            //        return Conflict();
-            //    }
-            //    else
-            //    {
-            //        throw;
-            //    }             
-            //}
+            
 
             BookingModels booking = await bookingRepository.PostBookingModels(bookingRequest);
 

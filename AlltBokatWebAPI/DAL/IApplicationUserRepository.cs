@@ -19,6 +19,7 @@ namespace AlltBokatWebAPI.DAL
         Task<List<ApplicationUserInfoViewModelWhithId>> GetApplicationUserNames();
         Task<List<ApplicationUser>> GetUsersWithBookingWithinTimeRange(DateTime startTime, DateTime endTime);
         Task<List<ApplicationUser>> GetUsersWithBookingNOTWithinTimeRange(DateTime startTime, DateTime endTime);
+        //void Save();
 
 
 

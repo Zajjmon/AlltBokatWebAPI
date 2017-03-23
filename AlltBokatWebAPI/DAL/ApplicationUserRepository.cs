@@ -4,12 +4,12 @@ using System.Linq;
 using System.Web;
 using AlltBokatWebAPI.Models;
 using static AlltBokatWebAPI.Models.ViewModels.ApplicationUserViewModels;
-using AlltBokatWebAPI.DAL.Services;
 using System.Threading.Tasks;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity;
 using System.Data.Entity;
 using System.Data.SqlClient;
+using AlltBokatWebAPI.Services;
 
 namespace AlltBokatWebAPI.DAL
 {
@@ -34,6 +34,7 @@ namespace AlltBokatWebAPI.DAL
         {
             using (context)
             {
+
                 ApplicationUser user = await UserManager.FindByIdAsync(id);
                 ApplicationUserInfoViewModelWhithId userInfo = ApplicationUserServices.ConvertToApplicationUserInfoViewModelWhitIdSingle(user);
 
@@ -96,5 +97,6 @@ namespace AlltBokatWebAPI.DAL
             List<ApplicationUser> users = await context.Database.SqlQuery<ApplicationUser>("dbo.SelectUsersWithBookingNOTWithinTimeRange @inputStartTime, @inputEndTime", new SqlParameter("@inputStartTime", startTime), new SqlParameter("@inputEndTime", endTime)).ToListAsync();
             return users;
         }
+        
     }
 }
