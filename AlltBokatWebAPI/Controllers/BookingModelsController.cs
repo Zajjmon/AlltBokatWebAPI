@@ -13,16 +13,22 @@ using AlltBokatWebAPI.Models;
 using AlltBokatWebAPI.DAL;
 using AlltBokatWebAPI.Models.ViewModels;
 using static AlltBokatWebAPI.Models.ViewModels.BookingViewModels;
+using AlltBokatWebAPI.Services;
 
 namespace AlltBokatWebAPI.Controllers
 {
     public class BookingModelsController : ApiController
     {
         private IBookingRepository bookingRepository;
+        private MailServices Mailservices;
+        private ApplicationUserRepository applicationUserRepository;
+
 
         public BookingModelsController()
         {
             this.bookingRepository = new BookingRepository(new ApplicationDbContext());
+            this.Mailservices = new MailServices();
+            applicationUserRepository = new ApplicationUserRepository(new ApplicationDbContext());
         }
 
         public BookingModelsController(IBookingRepository bookingRepository)
@@ -36,7 +42,7 @@ namespace AlltBokatWebAPI.Controllers
         {
 
             return bookingRepository.GetBookings();
-           
+
         }
 
 
@@ -77,11 +83,27 @@ namespace AlltBokatWebAPI.Controllers
         [ResponseType(typeof(BookingRequest))]
         public async Task<IHttpActionResult> PostBookingModels(BookingRequest bookingRequest)
         {
-            
+
 
             BookingModels booking = await bookingRepository.PostBookingModels(bookingRequest);
+            if (booking != null)
+            {
+                MailModels mailModel = new MailModels();
+                ApplicationUserViewModels.ApplicationUserInfoViewModelWhithId user = await applicationUserRepository.GetApplicationUserInfoById(booking.ApplicationUserId);
+                mailModel.ToEmail = booking.CustomerEmail;
+                mailModel.ToName = booking.CustomerName;
+
+                mailModel.ApplicationUserFirstName = user.FirstName;
+                mailModel.ApplicationUserLastName = user.LastName;
+                mailModel.StartTime = booking.BookingTimeSlotModels.startTime.ToString();
+                await Mailservices.NotifyBookingByMail(mailModel);
+            }
+
+
 
             return CreatedAtRoute("DefaultApi", new { id = booking.Id }, booking);
+
+
         }
 
         // DELETE: api/BookingModels/5
@@ -105,8 +127,8 @@ namespace AlltBokatWebAPI.Controllers
             base.Dispose(disposing);
         }
 
-        
-        
+
+
         private void SendBookingNotificationMail(BookingModels bookingModels, BookingTimeSlotModels bookingTimeSlotModels)
         {
             //MailTestKlass Mail = new MailTestKlass();
