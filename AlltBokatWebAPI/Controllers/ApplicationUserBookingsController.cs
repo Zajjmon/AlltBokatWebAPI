@@ -34,13 +34,13 @@ namespace AlltBokatWebAPI.Controllers
 
         //tex: api/ApplicationUserBookings/14290799-13b1-4985-9a72-3fc6666cbfdb Returns the bookings thats connected to a Applicationuser
 
-        //public async Task<List<BookingInfoViewModelWithId>> GetBookingModelsByUserId(string Id)
-        //{
-        //    //IQueryable<BookingInfoViewModel> BookingWithoutNavPropList = bookingRepository.GetBookingsByApplicationUserId(Id);
-        //    //return BookingWithoutNavPropList;
-        //    return bookingRepository.GetBookingsByApplicationUserId(Id).ToList();
+        public async Task<List<BookingInfoViewModelWithId>> GetBookingModelsByUserId(string Id)
+        {
+            //IQueryable<BookingInfoViewModel> BookingWithoutNavPropList = bookingRepository.GetBookingsByApplicationUserId(Id);
+            //return BookingWithoutNavPropList;
+            return bookingRepository.GetBookingsByApplicationUserId(Id).ToList();
 
-        //}
+        }
 
 
 

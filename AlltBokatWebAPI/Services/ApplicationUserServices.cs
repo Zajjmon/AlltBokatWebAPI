@@ -9,18 +9,18 @@ using static AlltBokatWebAPI.Models.ViewModels.ApplicationUserViewModels;
 namespace AlltBokatWebAPI.Services
 {
     public class ApplicationUserServices
-    { 
-        
-        
-        
+    {
+
+
+
         //Converts a List of ApplicationUsers to  a list of ApplicationUserInfoViewModels (A list of users with id)
         public List<ApplicationUserInfoViewModelWhithId> ConvertToApplicationUserInfoViewModelWithId(List<ApplicationUser> FullUserList)
         {
             var PartOfUserList = new List<ApplicationUserInfoViewModelWhithId>();
 
 
-            
-             foreach (ApplicationUser item in FullUserList)
+
+            foreach (ApplicationUser item in FullUserList)
             {
                 ApplicationUserInfoViewModelWhithId user = new ApplicationUserInfoViewModelWhithId();
                 user.Email = item.Email;
@@ -33,7 +33,7 @@ namespace AlltBokatWebAPI.Services
 
             }
 
-             return PartOfUserList;
+            return PartOfUserList;
         }
 
 
@@ -46,13 +46,16 @@ namespace AlltBokatWebAPI.Services
 
 
             ApplicationUserInfoViewModelWhithId user = new ApplicationUserInfoViewModelWhithId();
-                user.Email = User.Email;
-                user.UserName = User.UserName;
-                user.Id = User.Id;
-               
+            user.Email = User.Email;
+            user.UserName = User.UserName;
+            user.Id = User.Id;
+            user.FirstName = User.FirstName;
+            user.LastName = User.LastName;
 
 
-            
+
+
+
 
             return user;
         }

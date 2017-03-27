@@ -49,6 +49,12 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.9.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="SendGrid, Version=9.1.0.0, Culture=neutral, PublicKeyToken=4f047e93159395ca, processorArchitecture=MSIL">
+      <HintPath>..\packages\Sendgrid.9.1.0\lib\net452\SendGrid.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
@@ -73,9 +79,6 @@
     <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <Private>True</Private>
       <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
-    </Reference>
-    <Reference Include="Newtonsoft.Json">
-      <HintPath>..\packages\Newtonsoft.Json.6.0.4\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="System.Net.Http">
     </Reference>
@@ -223,6 +226,7 @@
     <Compile Include="DAL\IApplicationUserRepository.cs" />
     <Compile Include="DAL\IBookingRepository.cs" />
     <Compile Include="DAL\ApplicationUserRepository.cs" />
+    <Compile Include="Models\MailModels.cs" />
     <Compile Include="Services\ApplicationUserServices.cs" />
     <Compile Include="Services\BookingServices.cs" />
     <Compile Include="Extensions\IdentityExtensions.cs" />
@@ -265,9 +269,14 @@
     <Compile Include="Services\DTOs\ApplicationUserDTOs.cs" />
     <Compile Include="Services\DTOs\BookingDTOs.cs" />
     <Compile Include="Services\IBookingServices.cs" />
+    <Compile Include="Services\MailServices.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="App_Data\aspnet-AlltBokatWebAPI-20170301020446.mdf" />
+    <Content Include="App_Data\aspnet-AlltBokatWebAPI-20170301020446_log.ldf">
+      <DependentUpon>aspnet-AlltBokatWebAPI-20170301020446.mdf</DependentUpon>
+    </Content>
     <Content Include="Areas\HelpPage\HelpPage.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
@@ -323,7 +332,6 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="App_Data\" />
     <Folder Include="Views\ApplicationUserBookings\" />
   </ItemGroup>
   <ItemGroup>
