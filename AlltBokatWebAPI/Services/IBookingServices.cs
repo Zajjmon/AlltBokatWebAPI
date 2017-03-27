@@ -8,21 +8,23 @@ using static AlltBokatWebAPI.Services.DTOs.BookingDTOs;
 
 namespace AlltBokatWebAPI.Services
 {
-    public interface IBookingServices
+    public interface IBookingServices : IDisposable
     {
         
         Task<SingleBookingDTO> DeleteSingleBooking(int inputId);
-        Task<SingleBookingDTO> UpdateSingleBooking(int inputId);
+        Task<BookingRequestDTO> UpdateSingleBooking(int inputId, BookingRequestDTO bookingRequest);
         
-        Task<SingleBookingDTO> GetSingleBooking(BookingRequestDTO input);
-        Task<ListOfBookingsDTO> GetListOfBookings(BookingRequestDTO input);
-        Task<BookingRequestDTO> AddBookingRequest(int inputId);
+        Task<SingleBookingDTO> GetSingleBooking(int inputId);
+        Task<List<SingleBookingDTO>> GetListOfBookings();
+        Task<List<SingleBookingDTO>> GetListOfBookingByApplicationUserId(string Id);
+
+        Task<BookingRequestDTO> AddBookingRequest(BookingRequestDTO input);
 
 
         // detta TODO att skapa abstract bas-klass på servicen
-        Task<BookingModels> ConvertBookingRequestDTOtoBookingModels(BookingRequestDTO input);
-        Task<ListOfBookingsDTO> ConvertListOfBookingModelsToListOfBookingsDTO(IQueryable<BookingModels> input); // TODO kolla hur man konverterar en lista med modeller till en lista med DTO's
-        Task<SingleBookingDTO> ConvertBookingModelToSingleBookingDTO(BookingModels input);
+        //Task<BookingModels> ConvertBookingRequestDTOtoBookingModels(BookingRequestDTO input);
+        //Task<ListOfBookingsDTO> ConvertListOfBookingModelsToListOfBookingsDTO(IQueryable<BookingModels> input); 
+        //Task<SingleBookingDTO> ConvertBookingModelToSingleBookingDTO(BookingModels input);
 
     }
 }

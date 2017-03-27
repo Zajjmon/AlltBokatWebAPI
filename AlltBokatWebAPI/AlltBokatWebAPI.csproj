@@ -261,6 +261,7 @@
     <Compile Include="Providers\ApplicationOAuthProvider.cs" />
     <Compile Include="Results\ChallengeResult.cs" />
     <Compile Include="Services\BookingServicesBase.cs" />
+    <Compile Include="Services\BookingValidation.cs" />
     <Compile Include="Services\DTOs\ApplicationUserDTOs.cs" />
     <Compile Include="Services\DTOs\BookingDTOs.cs" />
     <Compile Include="Services\IBookingServices.cs" />

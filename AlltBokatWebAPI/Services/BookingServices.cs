@@ -4,74 +4,85 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
-using static AlltBokatWebAPI.Models.ViewModels.BookingViewModels;
+using AlltBokatWebAPI.Services.DTOs;
+using System.Threading.Tasks;
+using AlltBokatWebAPI.DAL;
 
-namespace AlltBokatWebAPI.DAL.Services
+namespace AlltBokatWebAPI.Services
 {
-    public class BookingServices
+    public class BookingServices : BookingServicesBase, IBookingServices
     {
 
+        private IBookingRepository bookingRepository;
 
-        //Converts a List of BookingModels to  a list of BookingsWithoutNavProps 
-        public List<BookingInfoViewModelWithId> ConvertToBookingWithoutNavProps(IQueryable<BookingModels> x)
+        public BookingServices()
         {
-            var BookingInfoViewModelWithIdList = new List<BookingInfoViewModelWithId>();
-
-            var FullBookingList= x.ToList();
-
-
-            foreach (BookingModels item in FullBookingList)
-            {
-
-                BookingInfoViewModelWithId BookingInfoViewModelWithId = new BookingInfoViewModelWithId();
-
-
-
-                BookingInfoViewModelWithId.Id = item.BookingTimeSlotModels.Id;
-                BookingInfoViewModelWithId.ApplicationUserId = item.ApplicationUserId;
-                BookingInfoViewModelWithId.CustomerEmail = item.CustomerEmail;
-                BookingInfoViewModelWithId.CustomerName = item.CustomerName;
-                BookingInfoViewModelWithId.description = item.description;
-                BookingInfoViewModelWithId.startTime = item.BookingTimeSlotModels.startTime;
-                BookingInfoViewModelWithId.endTime = item.BookingTimeSlotModels.endTime;
-                BookingInfoViewModelWithId.UserName = item.ApplicationUser.UserName;
-                BookingInfoViewModelWithIdList.Add(BookingInfoViewModelWithId);
-
-
-            }
-
-            return BookingInfoViewModelWithIdList;
+            this.bookingRepository = new BookingRepository(new ApplicationDbContext());
         }
 
-        public BookingInfoViewModelWithId ConvertToSingleBookingInfoViewModelWithId(BookingModels bookingModel)
+        public BookingServices(IBookingRepository bookingRepository)
+        {
+            this.bookingRepository = bookingRepository;
+        }
+
+
+
+
+        public async Task<BookingDTOs.BookingRequestDTO> AddBookingRequest(BookingDTOs.BookingRequestDTO input)
+        {
+            //ConvertBookingRequestDTOtoBookingModels(input);
+            
+          var bookingModel = await bookingRepository.PostBookingModels(ConvertBookingRequestDTOtoBookingModels(input));
+          var retur = ConvertBookingModelstoBookingRequestDTO(bookingModel);
+                return retur;
+            
+
+        }
+
+        public async Task<BookingDTOs.SingleBookingDTO> DeleteSingleBooking(int inputId)
+        {
+            var bookingModel = await bookingRepository.DeleteBookingModels(inputId);
+            var retur = ConvertBookingModelToSingleBookingDTO(bookingModel);
+            return retur;
+            
+        }
+
+        public void Dispose()
+        {
+            bookingRepository.Dispose();
+        }
+
+        public async Task<List<BookingDTOs.SingleBookingDTO>> GetListOfBookingByApplicationUserId(string Id)
+        {
+            var listOfBookings = await bookingRepository.GetBookingsByApplicationUserId(Id);
+            var retur = ConvertListOfBookingModelsToListOfBookingsDTO(listOfBookings);
+            return retur;
+        }
+
+        public async Task<List<BookingDTOs.SingleBookingDTO>> GetListOfBookings()
+        {
+            var listOfBookings = await bookingRepository.GetAllBookings();
+            var retur = ConvertListOfBookingModelsToListOfBookingsDTO(listOfBookings);
+            return retur;
+            
+        }
+
+        public async Task<BookingDTOs.SingleBookingDTO> GetSingleBooking(int inputId)
+        {
+            var bookingModel = await bookingRepository.GetBookingModelByIdAsync(inputId);
+            var retur = ConvertBookingModelToSingleBookingDTO(bookingModel);
+                return retur;
+            
+        }
+
+        public async Task<BookingDTOs.BookingRequestDTO> UpdateSingleBooking(int inputId, BookingDTOs.BookingRequestDTO bookingRequest)
         {
             
-            var singleBooking = new BookingInfoViewModelWithId
-            {
-                Id = bookingModel.Id,
-                ApplicationUserId = bookingModel.ApplicationUserId,
-                CustomerEmail = bookingModel.CustomerEmail,
-                CustomerName = bookingModel.CustomerName,
-                description = bookingModel.description,
-                startTime = bookingModel.BookingTimeSlotModels.startTime,
-                endTime = bookingModel.BookingTimeSlotModels.endTime,
-                UserName = bookingModel.ApplicationUser.UserName
-
-            };
-            return singleBooking;
-
+            var updatedBookingModel = await bookingRepository.PutBookingModels(inputId, ConvertBookingRequestDTOtoBookingModels(bookingRequest));
+            var retur = ConvertBookingModelstoBookingRequestDTO(updatedBookingModel);
+            return retur;
+            
         }
-
-
-
-
-
-
-
-
-
-
-
 
 
     }

@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Data.Entity;
-using System.Data.Entity.Infrastructure;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
@@ -10,98 +6,104 @@ using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.Description;
 using AlltBokatWebAPI.Models;
-using AlltBokatWebAPI.DAL;
-using AlltBokatWebAPI.Models.ViewModels;
-using static AlltBokatWebAPI.Models.ViewModels.BookingViewModels;
+using static AlltBokatWebAPI.Services.DTOs.BookingDTOs;
+using AlltBokatWebAPI.Services;
 
 namespace AlltBokatWebAPI.Controllers
 {
     public class BookingModelsController : ApiController
     {
-        private IBookingRepository bookingRepository;
+        
+        private IBookingServices bookingServices;
 
         public BookingModelsController()
         {
-            this.bookingRepository = new BookingRepository(new ApplicationDbContext());
+            
+            this.bookingServices = new BookingServices();
         }
 
-        public BookingModelsController(IBookingRepository bookingRepository)
+        public BookingModelsController(IBookingServices bookingServices)
         {
-            this.bookingRepository = bookingRepository;
+            this.bookingServices = bookingServices;
         }
 
         // GET: api/BookingModels
-
-        public IQueryable<BookingInfoViewModelWithId> GetBookings()
+        [ResponseType(typeof(List<SingleBookingDTO>))]
+        public async Task<IHttpActionResult> GetBookings()
         {
-
-            return bookingRepository.GetBookings();
+            var bookingList = await bookingServices.GetListOfBookings();
+            return Ok(bookingList);
            
         }
 
 
 
         // GET: api/BookingModels/5
-        [ResponseType(typeof(BookingInfoViewModelWithId))]
-        public async Task<IHttpActionResult> GetBookingModels(int id)
+        [ResponseType(typeof(SingleBookingDTO))]
+        public async Task<IHttpActionResult> GetSingleBookingById(int id)
         {
-            var singleBooking = await bookingRepository.GetSingleBooking(id);
-
+            var singleBooking = await bookingServices.GetSingleBooking(id);
             return Ok(singleBooking);
-
-            ////BookingModels bookingModels = await db.Bookings.FindAsync(id);
-            //BookingModels bookingModels = await bookingRepository.GetBookingModelByIdAsync(id);
-
-            //if (bookingModels == null)
-            //{
-            //    return NotFound();
-            //}
-
-            //return Ok(bookingModels);
+            
         }
 
         // PUT: api/BookingModels/5
         [ResponseType(typeof(void))]
-        public async Task<IHttpActionResult> PutBookingModels(int id, BookingModels bookingModels)
+        public async Task<IHttpActionResult> PutBookingModels(int id, BookingRequestDTO bookingRequest)
         {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-            BookingModels bookingModel = await bookingRepository.PutBookingModels(id, bookingModels);
 
-            return Ok(bookingModel);
+
+            var bookingValidator = new BookingValidation();
+            var errorList = bookingValidator.ValidateBookingRequestDTO(bookingRequest);
+            if (!errorList.All(x => x == true))
+            {
+                return ResponseMessage(Request.CreateResponse(HttpStatusCode.BadRequest, "The Booking Request is invalid or otherwise incomplete."));
+            }
+
+            bookingRequest = await bookingServices.UpdateSingleBooking(id, bookingRequest);
+
+            return Ok(bookingRequest);
         }
 
         // POST: api/BookingModels
-        [ResponseType(typeof(BookingRequest))]
-        public async Task<IHttpActionResult> PostBookingModels(BookingRequest bookingRequest)
+        [ResponseType(typeof(BookingRequestDTO))]
+        public async Task<IHttpActionResult> PostBookingModels(BookingRequestDTO bookingRequest)
         {
+            if(bookingRequest == null)
+            {
+                return ResponseMessage(Request.CreateResponse(HttpStatusCode.BadRequest, "You sent nothing."));
+            }
+            var bookingValidator = new BookingValidation();
+            var errorList = bookingValidator.ValidateBookingRequestDTO(bookingRequest);
+            if(!errorList.All(x => x == true))
+            {
+                return ResponseMessage(Request.CreateResponse(HttpStatusCode.BadRequest, "The Booking Request is invalid or otherwise incomplete."));
+            }
+            // kalla på service layer valideringsmetod(bookingRequest);
+            // gammal call BookingModels booking = await bookingRepository.PostBookingModels(bookingRequest);
+            bookingRequest = await bookingServices.AddBookingRequest(bookingRequest);
             
-
-            BookingModels booking = await bookingRepository.PostBookingModels(bookingRequest);
-
-            return CreatedAtRoute("DefaultApi", new { id = booking.Id }, booking);
+            return CreatedAtRoute("DefaultApi", new { id = bookingRequest.Id }, bookingRequest);
         }
 
         // DELETE: api/BookingModels/5
-        [ResponseType(typeof(BookingModels))]
+        [ResponseType(typeof(SingleBookingDTO))]
         public async Task<IHttpActionResult> DeleteBookingModels(int id)
         {
 
 
-            BookingModels bookingModels = await bookingRepository.DeleteBookingModels(id);
-            if (bookingModels == null)
+            SingleBookingDTO singleBookingDTO = await bookingServices.DeleteSingleBooking(id);
+            if (singleBookingDTO == null)
             {
                 return NotFound();
             }
 
-            return Ok(bookingModels);
+            return Ok(singleBookingDTO);
         }
 
         protected override void Dispose(bool disposing)
         {
-            bookingRepository.Dispose();
+            bookingServices.Dispose();
             base.Dispose(disposing);
         }
 

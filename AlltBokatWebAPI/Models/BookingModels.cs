@@ -12,25 +12,14 @@ namespace AlltBokatWebAPI.Models
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
-
         [DataType(DataType.EmailAddress)] // TO-DO lägg till REGEX-sträng för EMAIL
         public string CustomerEmail { get; set; }
-
         public string CustomerName { get; set; }
-
-
         public string description { get; set; }
-
-
-
-
-
         public string ApplicationUserId { get; set; }
         public virtual ApplicationUser ApplicationUser { get; set; }
-
         [ForeignKey("BookingTimeSlotModels")]
         public int BookingTimeSlotModelsId { get; set; }
-
         public virtual BookingTimeSlotModels BookingTimeSlotModels { get; set; }
 
 

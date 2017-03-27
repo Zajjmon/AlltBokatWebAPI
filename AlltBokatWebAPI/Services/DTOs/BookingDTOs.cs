@@ -9,7 +9,7 @@ namespace AlltBokatWebAPI.Services.DTOs
     {
         public class BookingRequestDTO
         {
-            
+            public int Id { get; set; }
             public string CustomerEmail { get; set; }
             public string CustomerName { get; set; }
             public string Description { get; set; }
@@ -31,10 +31,8 @@ namespace AlltBokatWebAPI.Services.DTOs
             public string ApplicationUserLastName { get; set; }
 
         }
-        public class ListOfBookingsDTO
-        {
-            public List<SingleBookingDTO> ListOfBookings { get; set; }
-        }
+
+        
 
 
     }

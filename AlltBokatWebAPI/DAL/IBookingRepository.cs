@@ -12,13 +12,13 @@ namespace AlltBokatWebAPI.DAL
 {
     public interface IBookingRepository : IDisposable
     {
-        IQueryable<BookingInfoViewModelWithId> GetBookings();
+        Task<List<BookingModels>> GetAllBookings();
         Task<BookingModels> GetBookingModelByIdAsync(int id);
         Task<BookingModels> PutBookingModels(int id, BookingModels bookingModels);
-        Task<BookingModels> PostBookingModels(BookingRequest BookingRequest);
+        Task<BookingModels> PostBookingModels(BookingModels BookingRequest);
         Task<BookingModels> DeleteBookingModels(int id);
-        IQueryable<BookingInfoViewModelWithId> GetBookingsByApplicationUserId(string Id);
-        Task<BookingInfoViewModelWithId> GetSingleBooking(int id);
+        Task<List<BookingModels>> GetBookingsByApplicationUserId(string Id);
+        //Task<BookingInfoViewModelWithId> GetSingleBooking(int id);
         //void Save();
 
     }
