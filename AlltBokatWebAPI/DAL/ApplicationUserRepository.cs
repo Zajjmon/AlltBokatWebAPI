@@ -18,13 +18,13 @@ namespace AlltBokatWebAPI.DAL
     {
         private ApplicationDbContext context;
         private ApplicationUserManager UserManager;
-        private ApplicationUserServices ApplicationUserServices;
+        
 
         public ApplicationUserRepository(ApplicationDbContext context)
         {
             this.context = context;
             this.UserManager = new ApplicationUserManager(new UserStore<ApplicationUser>(context));
-            this.ApplicationUserServices = new ApplicationUserServices();
+            
         }
 
         public async Task<List<ApplicationUser>> GetAllApplicationUsers()
