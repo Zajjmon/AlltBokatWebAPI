@@ -47,7 +47,7 @@ namespace AlltBokatWebAPI.Controllers
 
         }
         // GET: api/BookingModels/UsersBookings/
-        [Route("UsersBookings")]
+        [Route("api/BookingModels/UsersBookings/{customerId}")]
         [ResponseType(typeof(List<SingleBookingDTO>))]
         public async Task<IHttpActionResult> GetBookingByUserId(string id)
         {
