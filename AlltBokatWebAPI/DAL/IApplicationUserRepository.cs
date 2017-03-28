@@ -14,11 +14,11 @@ namespace AlltBokatWebAPI.DAL
 
     public interface IApplicationUserRepository : IDisposable
     {
-
-        Task<ApplicationUserInfoViewModelWhithId> GetApplicationUserInfoById(string id);
-        Task<List<ApplicationUserInfoViewModelWhithId>> GetApplicationUserNames();
+        
         Task<List<ApplicationUser>> GetUsersWithBookingWithinTimeRange(DateTime startTime, DateTime endTime);
         Task<List<ApplicationUser>> GetUsersWithBookingNOTWithinTimeRange(DateTime startTime, DateTime endTime);
+        Task<List<ApplicationUser>> GetAllApplicationUsers();
+        Task<ApplicationUser> GetApplicationUserInfoById(string id);
         //void Save();
 
 

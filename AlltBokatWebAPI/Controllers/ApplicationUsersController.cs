@@ -1,5 +1,6 @@
 ﻿using AlltBokatWebAPI.DAL;
 using AlltBokatWebAPI.Models;
+using AlltBokatWebAPI.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,19 +8,22 @@ using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web.Http;
+using System.Web.Http.Description;
 using static AlltBokatWebAPI.Models.ViewModels.ApplicationUserViewModels;
-
+using static AlltBokatWebAPI.Services.DTOs.ApplicationUserDTOs;
 
 namespace AlltBokatWebAPI.Controllers
 {
     public class ApplicationUsersController : ApiController
     {
 
-        private IApplicationUserRepository ApplicationUserRepository;
+        
+        private IApplicationUserServices ApplicationUserService;
 
         public ApplicationUsersController()
         {
-            this.ApplicationUserRepository = new ApplicationUserRepository(new ApplicationDbContext());
+           
+            this.ApplicationUserService = new ApplicationUserServices();
         }
 
 
@@ -29,27 +33,24 @@ namespace AlltBokatWebAPI.Controllers
 
 
 
-        //public async Task<List<ApplicationUserInfoViewModelWhithId>> GetGetUsersWithBookingWithinTimeRange(DateTime startTime, DateTime endTime)
-        //{
-        //    var asd = await ApplicationUserRepository.GetUsersWithBookingWithinTimeRange(startTime, endTime);
-        //    var dsa = 
-        //}
+
 
         // GET: api/ApplicationUsers
         //Returns a list of users with Id
-        public async Task <List<ApplicationUserInfoViewModelWhithId>> Get()
+        [ResponseType(typeof(List<ApplicationUserPersonInfoDTO>))]
+        public async Task<IHttpActionResult>Get()
         {
             
-            return await ApplicationUserRepository.GetApplicationUserNames();
+            return Ok(await ApplicationUserService.GetAllApplicationUsersPersonInfo());
         }
 
         // GET: api/ApplicationUsers/5 
         //Returns a users info including id
-        public async Task <ApplicationUserInfoViewModelWhithId> Get(string id)
+        public async Task<IHttpActionResult>Get(string id)
         {
               
 
-            return await ApplicationUserRepository.GetApplicationUserInfoById(id); ;
+            return Ok(await ApplicationUserService.GetApplicationUserPersonInfoById(id)); 
         }
 
         // POST: api/ApplicationUsers

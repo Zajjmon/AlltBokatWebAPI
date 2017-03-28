@@ -27,44 +27,38 @@ namespace AlltBokatWebAPI.DAL
             this.ApplicationUserServices = new ApplicationUserServices();
         }
 
-
+        public async Task<List<ApplicationUser>> GetAllApplicationUsers()
+        {
+            return await UserManager.Users.ToListAsync();
+        }
         
 
-        public async Task<ApplicationUserInfoViewModelWhithId> GetApplicationUserInfoById(string id)
+        public async Task<ApplicationUser> GetApplicationUserInfoById(string id)
         {
-            using (context)
-            {
-
-                ApplicationUser user = await UserManager.FindByIdAsync(id);
-                ApplicationUserInfoViewModelWhithId userInfo = ApplicationUserServices.ConvertToApplicationUserInfoViewModelWhitIdSingle(user);
-
-
-
-                
-                return userInfo;
-            }
+            return await UserManager.FindByIdAsync(id);
+            
         }
 
 
 
-        public async Task<List<ApplicationUserInfoViewModelWhithId>> GetApplicationUserNames()
-        {
-            using (context)
-            {
+        //public async Task<List<ApplicationUserInfoViewModelWhithId>> GetApplicationUserNames()
+        //{
+        //    using (context)
+        //    {
 
                 
-                 var FullList =await UserManager.Users.ToListAsync();
+        //         var FullList =await UserManager.Users.ToListAsync();
 
-                List<ApplicationUserInfoViewModelWhithId> usrList = new List<ApplicationUserInfoViewModelWhithId>();
-                usrList = ApplicationUserServices.ConvertToApplicationUserInfoViewModelWithId(FullList);
-
-
+        //        List<ApplicationUserInfoViewModelWhithId> usrList = new List<ApplicationUserInfoViewModelWhithId>();
+        //        usrList = ApplicationUserServices.ConvertToApplicationUserInfoViewModelWithId(FullList);
 
 
 
-                return usrList;
-            }
-        }
+
+
+        //        return usrList;
+        //    }
+        //}
 
         private bool disposed = false;
 

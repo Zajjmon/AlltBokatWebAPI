@@ -228,6 +228,7 @@
     <Compile Include="DAL\ApplicationUserRepository.cs" />
     <Compile Include="Models\MailModels.cs" />
     <Compile Include="Services\ApplicationUserServices.cs" />
+    <Compile Include="Services\ApplicationUserServicesBase.cs" />
     <Compile Include="Services\BookingServices.cs" />
     <Compile Include="Extensions\IdentityExtensions.cs" />
     <Compile Include="Global.asax.cs">
@@ -268,6 +269,7 @@
     <Compile Include="Services\BookingValidation.cs" />
     <Compile Include="Services\DTOs\ApplicationUserDTOs.cs" />
     <Compile Include="Services\DTOs\BookingDTOs.cs" />
+    <Compile Include="Services\IApplicationUserServices.cs" />
     <Compile Include="Services\IBookingServices.cs" />
     <Compile Include="Services\MailServices.cs" />
     <Compile Include="Startup.cs" />
