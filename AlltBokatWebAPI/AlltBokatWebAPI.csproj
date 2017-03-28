@@ -215,9 +215,9 @@
     <Compile Include="Areas\HelpPage\SampleGeneration\TextSample.cs" />
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
     <Compile Include="Controllers\AccountController.cs" />
-    <Compile Include="Controllers\ApplicationUserBookingsController.cs" />
     <Compile Include="Controllers\ApplicationUsersController.cs" />
     <Compile Include="Controllers\BookingModelsController.cs" />
+    <Compile Include="Controllers\BookingsByApplicationUserController.cs" />
     <Compile Include="Controllers\BookingTimeSlotModelsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\UserRatingModelsController.cs" />
@@ -256,7 +256,6 @@
     <Compile Include="Models\BookingModels.cs" />
     <Compile Include="Models\BookingTimeSlotModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
-    <Compile Include="Models\MailTestKlassGMail.cs" />
     <Compile Include="Models\UserRatingModels.cs" />
     <Compile Include="Models\ViewModels\ApplicationUserViewModels.cs" />
     <Compile Include="Models\ViewModels\BookingViewModels.cs" />
