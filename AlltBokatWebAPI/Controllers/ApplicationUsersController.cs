@@ -46,6 +46,7 @@ namespace AlltBokatWebAPI.Controllers
 
         // GET: api/ApplicationUsers/5 
         //Returns a users info including id
+        [ResponseType(typeof(List<ApplicationUserPersonInfoDTO>))]
         public async Task<IHttpActionResult>Get(string id)
         {
               

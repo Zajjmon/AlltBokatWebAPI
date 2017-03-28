@@ -46,6 +46,18 @@ namespace AlltBokatWebAPI.Controllers
             return Ok(singleBooking);
 
         }
+        // GET: api/BookingModels/UsersBookings/
+        [Route("UsersBookings")]
+        [ResponseType(typeof(List<SingleBookingDTO>))]
+        public async Task<IHttpActionResult> GetBookingByUserId(string id)
+        {
+            var listOfBookings = await bookingServices.GetListOfBookingByApplicationUserId(id);
+            if(listOfBookings == null)
+            {
+                return ResponseMessage(Request.CreateResponse(HttpStatusCode.BadRequest, "There is no booking associated with that application user ID."));
+            }
+            return Ok(listOfBookings);
+        }
 
         // PUT: api/BookingModels/5
         [ResponseType(typeof(void))]
