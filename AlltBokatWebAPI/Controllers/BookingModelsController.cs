@@ -13,12 +13,12 @@ namespace AlltBokatWebAPI.Controllers
 {
     public class BookingModelsController : ApiController
     {
-        
+
         private IBookingServices bookingServices;
 
         public BookingModelsController()
         {
-            
+
             this.bookingServices = new BookingServices();
         }
 
@@ -33,7 +33,7 @@ namespace AlltBokatWebAPI.Controllers
         {
             var bookingList = await bookingServices.GetListOfBookings();
             return Ok(bookingList);
-           
+
         }
 
 
@@ -44,7 +44,7 @@ namespace AlltBokatWebAPI.Controllers
         {
             var singleBooking = await bookingServices.GetSingleBooking(id);
             return Ok(singleBooking);
-            
+
         }
 
         // PUT: api/BookingModels/5
@@ -69,20 +69,20 @@ namespace AlltBokatWebAPI.Controllers
         [ResponseType(typeof(BookingRequestDTO))]
         public async Task<IHttpActionResult> PostBookingModels(BookingRequestDTO bookingRequest)
         {
-            if(bookingRequest == null)
+            if (bookingRequest == null)
             {
                 return ResponseMessage(Request.CreateResponse(HttpStatusCode.BadRequest, "You sent nothing."));
             }
             var bookingValidator = new BookingValidation();
             var errorList = bookingValidator.ValidateBookingRequestDTO(bookingRequest);
-            if(!errorList.All(x => x == true))
+            if (!errorList.All(x => x == true))
             {
                 return ResponseMessage(Request.CreateResponse(HttpStatusCode.BadRequest, "The Booking Request is invalid or otherwise incomplete."));
             }
             // kalla på service layer valideringsmetod(bookingRequest);
             // gammal call BookingModels booking = await bookingRepository.PostBookingModels(bookingRequest);
             bookingRequest = await bookingServices.AddBookingRequest(bookingRequest);
-            
+
             return CreatedAtRoute("DefaultApi", new { id = bookingRequest.Id }, bookingRequest);
         }
 
@@ -107,13 +107,7 @@ namespace AlltBokatWebAPI.Controllers
             base.Dispose(disposing);
         }
 
-        
-        
-        private void SendBookingNotificationMail(BookingModels bookingModels, BookingTimeSlotModels bookingTimeSlotModels)
-        {
-            //MailTestKlass Mail = new MailTestKlass();
-            //Users.GetApplicationUserbyId(bookingModels.)
-            //Mail.sendmail(bookingModels.CustomerEmail, bookingModels.CustomerName, bookingModels.ApplicationUser.) // TO DO
-        }
+
+
     }
 }
