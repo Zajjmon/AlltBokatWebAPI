@@ -217,7 +217,6 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\ApplicationUsersController.cs" />
     <Compile Include="Controllers\BookingModelsController.cs" />
-    <Compile Include="Controllers\BookingsByApplicationUserController.cs" />
     <Compile Include="Controllers\BookingTimeSlotModelsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\UserRatingModelsController.cs" />

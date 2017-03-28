@@ -53,6 +53,24 @@ namespace AlltBokatWebAPI.Controllers
             return Ok(await ApplicationUserService.GetApplicationUserPersonInfoById(id)); 
         }
 
+        //GET: api/ApplicationUsers/BookingWithinTimeRange
+        //Returns all users with a booking within the two Datetimes provided.
+        [Route("BookingWithinTimeRange")]
+        [ResponseType(typeof(List<ApplicationUserPersonInfoDTO>))]
+        public async Task<IHttpActionResult>GetWithinTimeRange(DateTime startTime, DateTime endTime)
+        {
+            return Ok(await ApplicationUserService.GetUsersWithBookingWithinTimeRange(startTime, endTime));
+        }
+
+        //GET: api/ApplicationUsers/BookingNOTWithinTimeRange
+        //Returns all users whom does NOT have a booking within the two provided Datetimes.
+        [Route("BookingNOTWithinTimeRange")]
+        [ResponseType(typeof(List<ApplicationUserPersonInfoDTO>))]
+        public async Task<IHttpActionResult> GetNOTWithinTimeRange(DateTime startTime, DateTime endTime)
+        {
+            return Ok(await ApplicationUserService.GetUsersWithBookingNOTWithinTimeRange(startTime, endTime));
+        }
+
         // POST: api/ApplicationUsers
         public void Post([FromBody]string value)
         {
