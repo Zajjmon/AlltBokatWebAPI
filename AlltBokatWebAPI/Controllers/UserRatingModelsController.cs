@@ -1,119 +1,125 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Data.Entity;
-using System.Data.Entity.Infrastructure;
-using System.Linq;
-using System.Net;
-using System.Net.Http;
-using System.Threading.Tasks;
-using System.Web.Http;
-using System.Web.Http.Description;
-using AlltBokatWebAPI.Models;
+﻿//using System;
+//using System.Collections.Generic;
+//using System.Data;
+//using System.Data.Entity;
+//using System.Data.Entity.Infrastructure;
+//using System.Linq;
+//using System.Net;
+//using System.Net.Http;
+//using System.Threading.Tasks;
+//using System.Web.Http;
+//using System.Web.Http.Description;
+//using AlltBokatWebAPI.Models;
 
-namespace AlltBokatWebAPI.Controllers
-{
-    public class UserRatingModelsController : ApiController
-    {
-        private ApplicationDbContext db = new ApplicationDbContext();
 
-        // GET: api/UserRatingModels
-        public IQueryable<UserRatingModels> GetUserRatings()
-        {
-            return db.UserRatings;
-        }
+// DENNA CONTROLLER ÄR EJ I BRUK.
+// DEN KOMMER ANVÄNDAS I SENARE ITERATIONER AV ALLTBOKAT PROJEKTET.
 
-        // GET: api/UserRatingModels/5
-        [ResponseType(typeof(UserRatingModels))]
-        public async Task<IHttpActionResult> GetUserRatingModels(int id)
-        {
-            UserRatingModels userRatingModels = await db.UserRatings.FindAsync(id);
-            if (userRatingModels == null)
-            {
-                return NotFound();
-            }
 
-            return Ok(userRatingModels);
-        }
 
-        // PUT: api/UserRatingModels/5
-        [ResponseType(typeof(void))]
-        public async Task<IHttpActionResult> PutUserRatingModels(int id, UserRatingModels userRatingModels)
-        {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
+//namespace AlltBokatWebAPI.Controllers
+//{
+//    public class UserRatingModelsController : ApiController
+//    {
+//        private ApplicationDbContext db = new ApplicationDbContext();
 
-            if (id != userRatingModels.Id)
-            {
-                return BadRequest();
-            }
+//        // GET: api/UserRatingModels
+//        public IQueryable<UserRatingModels> GetUserRatings()
+//        {
+//            return db.UserRatings;
+//        }
 
-            db.Entry(userRatingModels).State = EntityState.Modified;
+//        // GET: api/UserRatingModels/5
+//        [ResponseType(typeof(UserRatingModels))]
+//        public async Task<IHttpActionResult> GetUserRatingModels(int id)
+//        {
+//            UserRatingModels userRatingModels = await db.UserRatings.FindAsync(id);
+//            if (userRatingModels == null)
+//            {
+//                return NotFound();
+//            }
 
-            try
-            {
-                await db.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!UserRatingModelsExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
+//            return Ok(userRatingModels);
+//        }
 
-            return StatusCode(HttpStatusCode.NoContent);
-        }
+//        // PUT: api/UserRatingModels/5
+//        [ResponseType(typeof(void))]
+//        public async Task<IHttpActionResult> PutUserRatingModels(int id, UserRatingModels userRatingModels)
+//        {
+//            if (!ModelState.IsValid)
+//            {
+//                return BadRequest(ModelState);
+//            }
 
-        // POST: api/UserRatingModels
-        [ResponseType(typeof(UserRatingModels))]
-        public async Task<IHttpActionResult> PostUserRatingModels(UserRatingModels userRatingModels)
-        {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
+//            if (id != userRatingModels.Id)
+//            {
+//                return BadRequest();
+//            }
 
-            db.UserRatings.Add(userRatingModels);
-            await db.SaveChangesAsync();
+//            db.Entry(userRatingModels).State = EntityState.Modified;
 
-            return CreatedAtRoute("DefaultApi", new { id = userRatingModels.Id }, userRatingModels);
-        }
+//            try
+//            {
+//                await db.SaveChangesAsync();
+//            }
+//            catch (DbUpdateConcurrencyException)
+//            {
+//                if (!UserRatingModelsExists(id))
+//                {
+//                    return NotFound();
+//                }
+//                else
+//                {
+//                    throw;
+//                }
+//            }
 
-        // DELETE: api/UserRatingModels/5
-        [ResponseType(typeof(UserRatingModels))]
-        public async Task<IHttpActionResult> DeleteUserRatingModels(int id)
-        {
-            UserRatingModels userRatingModels = await db.UserRatings.FindAsync(id);
-            if (userRatingModels == null)
-            {
-                return NotFound();
-            }
+//            return StatusCode(HttpStatusCode.NoContent);
+//        }
 
-            db.UserRatings.Remove(userRatingModels);
-            await db.SaveChangesAsync();
+//        // POST: api/UserRatingModels
+//        [ResponseType(typeof(UserRatingModels))]
+//        public async Task<IHttpActionResult> PostUserRatingModels(UserRatingModels userRatingModels)
+//        {
+//            if (!ModelState.IsValid)
+//            {
+//                return BadRequest(ModelState);
+//            }
 
-            return Ok(userRatingModels);
-        }
+//            db.UserRatings.Add(userRatingModels);
+//            await db.SaveChangesAsync();
 
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                db.Dispose();
-            }
-            base.Dispose(disposing);
-        }
+//            return CreatedAtRoute("DefaultApi", new { id = userRatingModels.Id }, userRatingModels);
+//        }
 
-        private bool UserRatingModelsExists(int id)
-        {
-            return db.UserRatings.Count(e => e.Id == id) > 0;
-        }
-    }
-}
+//        // DELETE: api/UserRatingModels/5
+//        [ResponseType(typeof(UserRatingModels))]
+//        public async Task<IHttpActionResult> DeleteUserRatingModels(int id)
+//        {
+//            UserRatingModels userRatingModels = await db.UserRatings.FindAsync(id);
+//            if (userRatingModels == null)
+//            {
+//                return NotFound();
+//            }
+
+//            db.UserRatings.Remove(userRatingModels);
+//            await db.SaveChangesAsync();
+
+//            return Ok(userRatingModels);
+//        }
+
+//        protected override void Dispose(bool disposing)
+//        {
+//            if (disposing)
+//            {
+//                db.Dispose();
+//            }
+//            base.Dispose(disposing);
+//        }
+
+//        private bool UserRatingModelsExists(int id)
+//        {
+//            return db.UserRatings.Count(e => e.Id == id) > 0;
+//        }
+//    }
+//}

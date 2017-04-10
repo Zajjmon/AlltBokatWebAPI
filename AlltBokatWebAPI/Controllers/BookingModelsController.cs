@@ -31,8 +31,8 @@ namespace AlltBokatWebAPI.Controllers
         [ResponseType(typeof(List<SingleBookingDTO>))]
         public async Task<IHttpActionResult> GetBookings()
         {
-            var bookingList = await bookingServices.GetListOfBookings();
-            return Ok(bookingList);
+            
+            return Ok(await bookingServices.GetListOfBookings());
 
         }
 
@@ -43,7 +43,11 @@ namespace AlltBokatWebAPI.Controllers
         public async Task<IHttpActionResult> GetSingleBookingById(int id)
         {
             var singleBooking = await bookingServices.GetSingleBooking(id);
-            return Ok(singleBooking);
+            if(singleBooking == null)
+            {
+                return ResponseMessage(Request.CreateResponse(HttpStatusCode.BadRequest, "There is no booking associated with that BookingId"));
+            }
+            return Ok(await bookingServices.GetSingleBooking(id));
 
         }
         // GET: api/BookingModels/UsersBookings/
@@ -94,7 +98,7 @@ namespace AlltBokatWebAPI.Controllers
             // kalla på service layer valideringsmetod(bookingRequest);
             // gammal call BookingModels booking = await bookingRepository.PostBookingModels(bookingRequest);
             bookingRequest = await bookingServices.AddBookingRequest(bookingRequest);
-
+            // TO DO returnera fel om en sådan booking redan finns
             return CreatedAtRoute("DefaultApi", new { id = bookingRequest.Id }, bookingRequest);
         }
 

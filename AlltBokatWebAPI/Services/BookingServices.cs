@@ -30,20 +30,18 @@ namespace AlltBokatWebAPI.Services
 
         public async Task<BookingDTOs.BookingRequestDTO> AddBookingRequest(BookingDTOs.BookingRequestDTO input)
         {
-            //ConvertBookingRequestDTOtoBookingModels(input);
             
-          var bookingModel = await bookingRepository.PostBookingModels(ConvertBookingRequestDTOtoBookingModels(input));
-          var retur = ConvertBookingModelstoBookingRequestDTO(bookingModel);
-                return retur;
+         
+          return ConvertBookingModelstoBookingRequestDTO(await bookingRepository.PostBookingModels(ConvertBookingRequestDTOtoBookingModels(input)));
+               
             
 
         }
 
         public async Task<BookingDTOs.SingleBookingDTO> DeleteSingleBooking(int inputId)
         {
-            var bookingModel = await bookingRepository.DeleteBookingModels(inputId);
-            var retur = ConvertBookingModelToSingleBookingDTO(bookingModel);
-            return retur;
+            
+            return ConvertBookingModelToSingleBookingDTO(await bookingRepository.DeleteBookingModels(inputId));
             
         }
 
@@ -54,33 +52,28 @@ namespace AlltBokatWebAPI.Services
 
         public async Task<List<BookingDTOs.SingleBookingDTO>> GetListOfBookingByApplicationUserId(string Id)
         {
-            var listOfBookings = await bookingRepository.GetBookingsByApplicationUserId(Id);
-            var retur = ConvertListOfBookingModelsToListOfBookingsDTO(listOfBookings);
-            return retur;
+           
+            return ConvertListOfBookingModelsToListOfBookingsDTO(await bookingRepository.GetBookingsByApplicationUserId(Id));
         }
 
         public async Task<List<BookingDTOs.SingleBookingDTO>> GetListOfBookings()
         {
-            var listOfBookings = await bookingRepository.GetAllBookings();
-            var retur = ConvertListOfBookingModelsToListOfBookingsDTO(listOfBookings);
-            return retur;
+            return ConvertListOfBookingModelsToListOfBookingsDTO(await bookingRepository.GetAllBookings());
             
         }
 
         public async Task<BookingDTOs.SingleBookingDTO> GetSingleBooking(int inputId)
         {
-            var bookingModel = await bookingRepository.GetBookingModelByIdAsync(inputId);
-            var retur = ConvertBookingModelToSingleBookingDTO(bookingModel);
-                return retur;
+            return ConvertBookingModelToSingleBookingDTO(await bookingRepository.GetBookingModelByIdAsync(inputId));
+                
             
         }
 
         public async Task<BookingDTOs.BookingRequestDTO> UpdateSingleBooking(int inputId, BookingDTOs.BookingRequestDTO bookingRequest)
         {
             
-            var updatedBookingModel = await bookingRepository.PutBookingModels(inputId, ConvertBookingRequestDTOtoBookingModels(bookingRequest));
-            var retur = ConvertBookingModelstoBookingRequestDTO(updatedBookingModel);
-            return retur;
+            return ConvertBookingModelstoBookingRequestDTO(await bookingRepository.PutBookingModels(inputId, ConvertBookingRequestDTOtoBookingModels(bookingRequest)));
+            
             
         }
 

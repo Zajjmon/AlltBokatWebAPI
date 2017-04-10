@@ -74,23 +74,23 @@ namespace AlltBokatWebAPI.Controllers
         }
 
         // POST: api/ApplicationUsers
-        public void Post([FromBody]string value)
-        {
-        }
+        //public void Post([FromBody]string value)
+        //{
+        //}
 
-        // PUT: api/ApplicationUsers/5
-        public void Put(int id, [FromBody]string value)
-        {
+        //// PUT: api/ApplicationUsers/5
+        //public void Put(int id, [FromBody]string value)
+        //{
             
             
 
 
-        }
+        //}
 
-        // DELETE: api/ApplicationUsers/5
-        public void Delete(int id)
-        {
-        }
+        //// DELETE: api/ApplicationUsers/5
+        //public void Delete(int id)
+        //{
+        //}
 
 
 
