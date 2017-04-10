@@ -6,6 +6,7 @@ using AlltBokatWebAPI.Models;
 using SendGrid;
 using System.Threading.Tasks;
 using SendGrid.Helpers.Mail;
+using static AlltBokatWebAPI.Services.DTOs.BookingDTOs;
 
 namespace AlltBokatWebAPI.Services
 {
@@ -15,18 +16,21 @@ namespace AlltBokatWebAPI.Services
 
 
 
-        public async Task NotifyBookingByMail(MailModels x)
+        public async Task NotifyBookingByMail(BookingRequestDTO NewBooking)
 
         {
             MailModels mailmodel = new MailModels();
-            mailmodel = x;
+            mailmodel.ToEmail = NewBooking.CustomerEmail;
+            mailmodel.ToName = NewBooking.CustomerName;
+            mailmodel.StartTime = NewBooking.StartTime.ToString();
+
             //SG.k - 1qp0IET1KI81dkyb7vGg.171FKbfy0Vk3P9i489GLuQaU0A7G49JPjim7NgYoC1U
             //var apiKey = Environment.GetEnvironmentVariable("SENDGRID_API_KEY");
 
             mailmodel.subject = "Booking notification";
             mailmodel.plainTextContent = "Hello " + mailmodel.ToName + "!" + " <br/> You have a confirmed reservation at: " + mailmodel.StartTime + " <br/> with" + mailmodel.ApplicationUserFirstName + " " + mailmodel.ApplicationUserLastName + "<br/> Thank you for booking with us" + "<br/> Best Regards AlltBokat customer support";
             mailmodel.htmlContent = "Hello" + mailmodel.ToName + "!" + " <br/> You have a confirmed reservation at: " + mailmodel.StartTime + " <br/> with " + mailmodel.ApplicationUserFirstName + " " + mailmodel.ApplicationUserLastName + "<br/> Thank you for booking with us" + "<br/> Best Regards AlltBokat customer support";
-            mailmodel.FromEmail = ("nyqvist.david@gmail.com");
+            mailmodel.FromEmail = ("david.nyqvist@hotmail.com");
             mailmodel.FromName = ("Alltbokat Support");
 
 

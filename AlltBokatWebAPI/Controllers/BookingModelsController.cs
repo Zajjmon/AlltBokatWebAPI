@@ -15,11 +15,13 @@ namespace AlltBokatWebAPI.Controllers
     {
 
         private IBookingServices bookingServices;
+        private MailServices mailservices;
 
         public BookingModelsController()
         {
 
             this.bookingServices = new BookingServices();
+            mailservices = new MailServices();
         }
 
         public BookingModelsController(IBookingServices bookingServices)
@@ -31,7 +33,7 @@ namespace AlltBokatWebAPI.Controllers
         [ResponseType(typeof(List<SingleBookingDTO>))]
         public async Task<IHttpActionResult> GetBookings()
         {
-            
+
             return Ok(await bookingServices.GetListOfBookings());
 
         }
@@ -43,7 +45,7 @@ namespace AlltBokatWebAPI.Controllers
         public async Task<IHttpActionResult> GetSingleBookingById(int id)
         {
             var singleBooking = await bookingServices.GetSingleBooking(id);
-            if(singleBooking == null)
+            if (singleBooking == null)
             {
                 return ResponseMessage(Request.CreateResponse(HttpStatusCode.BadRequest, "There is no booking associated with that BookingId"));
             }
@@ -56,7 +58,7 @@ namespace AlltBokatWebAPI.Controllers
         public async Task<IHttpActionResult> GetBookingByUserId(string id)
         {
             var listOfBookings = await bookingServices.GetListOfBookingByApplicationUserId(id);
-            if(listOfBookings == null)
+            if (listOfBookings == null)
             {
                 return ResponseMessage(Request.CreateResponse(HttpStatusCode.BadRequest, "There is no booking associated with that application user ID."));
             }
@@ -99,6 +101,8 @@ namespace AlltBokatWebAPI.Controllers
             // gammal call BookingModels booking = await bookingRepository.PostBookingModels(bookingRequest);
             bookingRequest = await bookingServices.AddBookingRequest(bookingRequest);
             // TO DO returnera fel om en sådan booking redan finns
+
+            await mailservices.NotifyBookingByMail(bookingRequest);
             return CreatedAtRoute("DefaultApi", new { id = bookingRequest.Id }, bookingRequest);
         }
 
