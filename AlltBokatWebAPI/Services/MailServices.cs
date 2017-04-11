@@ -38,7 +38,7 @@ namespace AlltBokatWebAPI.Services
             var to = new EmailAddress(mailmodel.ToEmail, mailmodel.ToName);
 
             var apiKey = Environment.GetEnvironmentVariable("SENDGRID_API_KEY");
-
+            //var apiKey = "1qp0IET1KI81dkyb7vGg.171FKbfy0Vk3P9i489GLuQaU0A7G49JPjim7NgYoC1U";
 
             var client = new SendGridClient(apiKey);
 
