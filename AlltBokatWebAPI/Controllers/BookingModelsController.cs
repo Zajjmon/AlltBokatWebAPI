@@ -89,7 +89,7 @@ namespace AlltBokatWebAPI.Controllers
         {
             if (bookingRequest == null)
             {
-                return ResponseMessage(Request.CreateResponse(HttpStatusCode.BadRequest, "You sent nothing."));
+                return ResponseMessage(Request.CreateResponse(HttpStatusCode.BadRequest, "The Booking Request is invalid or otherwise incomplete."));
             }
             var bookingValidator = new BookingValidation();
             var errorList = bookingValidator.ValidateBookingRequestDTO(bookingRequest);
