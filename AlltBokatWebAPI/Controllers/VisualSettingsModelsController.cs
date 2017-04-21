@@ -23,18 +23,6 @@ namespace AlltBokatWebAPI.Controllers
             return db.VisualSettingsModels;
         }
 
-        // GET: api/VisualSettingsModels/5
-        [ResponseType(typeof(VisualSettingsModel))]
-        public async Task<IHttpActionResult> GetVisualSettingsModel(int id)
-        {
-            VisualSettingsModel visualSettingsModel = await db.VisualSettingsModels.FindAsync(id);
-            if (visualSettingsModel == null)
-            {
-                return NotFound();
-            }
-
-            return Ok(visualSettingsModel);
-        }
 
         // PUT: api/VisualSettingsModels/5
         [ResponseType(typeof(void))]
@@ -70,6 +58,44 @@ namespace AlltBokatWebAPI.Controllers
 
             return StatusCode(HttpStatusCode.NoContent);
         }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        //Dessa under behövs nog inte sen , för det ska ju bara finnas en aktiv url i back end.
+
+
+        // GET: api/VisualSettingsModels/5
+        [ResponseType(typeof(VisualSettingsModel))]
+        public async Task<IHttpActionResult> GetVisualSettingsModel(int id)
+        {
+            VisualSettingsModel visualSettingsModel = await db.VisualSettingsModels.FindAsync(id);
+            if (visualSettingsModel == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(visualSettingsModel);
+        }
+
+
 
         // POST: api/VisualSettingsModels
         [ResponseType(typeof(VisualSettingsModel))]
