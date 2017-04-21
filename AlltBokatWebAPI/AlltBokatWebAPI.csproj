@@ -221,6 +221,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\UserRatingModelsController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
+    <Compile Include="Controllers\VisualSettingsModelsController.cs" />
     <Compile Include="DAL\BookingRepository.cs" />
     <Compile Include="DAL\IApplicationUserRepository.cs" />
     <Compile Include="DAL\IBookingRepository.cs" />
@@ -233,8 +234,17 @@
     <Compile Include="Migrations\201704201123237_60.Designer.cs">
       <DependentUpon>201704201123237_60.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201704211221456_11.cs" />
+    <Compile Include="Migrations\201704211221456_11.Designer.cs">
+      <DependentUpon>201704211221456_11.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201704211226140_12.cs" />
+    <Compile Include="Migrations\201704211226140_12.Designer.cs">
+      <DependentUpon>201704211226140_12.cs</DependentUpon>
+    </Compile>
     <Compile Include="Models\CategoryModels.cs" />
     <Compile Include="Models\MailModels.cs" />
+    <Compile Include="Models\VisualSettingsModel.cs" />
     <Compile Include="Services\ApplicationUserServices.cs" />
     <Compile Include="Services\ApplicationUserServicesBase.cs" />
     <Compile Include="Services\BookingServices.cs" />
@@ -370,6 +380,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201704201123237_60.resx">
       <DependentUpon>201704201123237_60.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201704211221456_11.resx">
+      <DependentUpon>201704211221456_11.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201704211226140_12.resx">
+      <DependentUpon>201704211226140_12.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
