@@ -78,5 +78,7 @@ namespace AlltBokatWebAPI.Models
         {
             return new ApplicationDbContext();
         }
+
+        public System.Data.Entity.DbSet<AlltBokatWebAPI.Models.CategoryModels> CategoryModels { get; set; }
     }
 }
