@@ -17,6 +17,7 @@ namespace AlltBokatWebAPI.Models
         public string CustomerName { get; set; }
         public string description { get; set; }
         public string ApplicationUserId { get; set; }
+        public Boolean Approved { get; set; }
         public virtual ApplicationUser ApplicationUser { get; set; }
         [ForeignKey("BookingTimeSlotModels")]
         public int BookingTimeSlotModelsId { get; set; }

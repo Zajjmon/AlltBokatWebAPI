@@ -20,6 +20,10 @@ namespace AlltBokatWebAPI.Services
 
         Task<BookingRequestDTO> AddBookingRequest(BookingRequestDTO input);
 
+        Task<List<SingleBookingDTO>> GetListOfUnapprovedBookingsByUserId(string Id);
+
+        Task<SingleBookingDTO> PutApproveBooking(int Id);
+
 
         // detta TODO att skapa abstract bas-klass på servicen
         //Task<BookingModels> ConvertBookingRequestDTOtoBookingModels(BookingRequestDTO input);

@@ -36,8 +36,8 @@ namespace AlltBokatWebAPI.DAL
             return bookingModels;
 
         }
-    
 
+        
         public async Task<BookingModels> GetBookingModelByIdAsync(int id)
         {
             
@@ -51,6 +51,7 @@ namespace AlltBokatWebAPI.DAL
                            bookingTimeSlotModelId = p.BookingTimeSlotModelsId,
                            bookingTimeSlotModel = p.BookingTimeSlotModels,
                            ApplicationUserId = p.ApplicationUser.Id,
+                           Approved = p.Approved,
                            ApplicationUser = new 
                             {
                               FirstName = p.ApplicationUser.FirstName,
@@ -62,6 +63,7 @@ namespace AlltBokatWebAPI.DAL
                 Id = x.id, description = x.description,
                 CustomerEmail = x.customerEmail,
                 CustomerName = x.customerName,
+                Approved = x.Approved,
                 ApplicationUserId = x.ApplicationUserId,
                 ApplicationUser = new ApplicationUser { FirstName = x.ApplicationUser.FirstName, LastName = x.ApplicationUser.LastName},
                 BookingTimeSlotModelsId = x.bookingTimeSlotModelId,
@@ -83,6 +85,7 @@ namespace AlltBokatWebAPI.DAL
                                  description = p.description,
                                  bookingTimeSlotModelId = p.BookingTimeSlotModelsId,
                                  bookingTimeSlotModel = p.BookingTimeSlotModels,
+
                                  ApplicationUserId = p.ApplicationUser.Id,
                                  ApplicationUser = new
                                  {
@@ -147,6 +150,25 @@ namespace AlltBokatWebAPI.DAL
 
         }
 
+        public async Task<BookingModels> PutApproveBooking(int id)
+        {
+
+            var approvedBooking = await context.Bookings.FindAsync(id);
+            approvedBooking.Approved = true;
+            context.Entry(approvedBooking).Property(x => x.Approved).IsModified = true;
+            try
+            {
+                
+                await context.SaveChangesAsync();
+                return approvedBooking;
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                throw;
+            }
+
+        }
+
         private bool disposed = false;
 
         protected virtual void Dispose(bool disposing)
@@ -185,6 +207,7 @@ namespace AlltBokatWebAPI.DAL
                                  description = p.description,
                                  bookingTimeSlotModelId = p.BookingTimeSlotModelsId,
                                  bookingTimeSlotModel = p.BookingTimeSlotModels,
+                                 Approved = p.Approved,
                                  ApplicationUserId = p.ApplicationUser.Id,
                                  ApplicationUser = new
                                  {
@@ -200,12 +223,48 @@ namespace AlltBokatWebAPI.DAL
                 description = x.description,
                 CustomerEmail = x.customerEmail,
                 CustomerName = x.customerName,
+                Approved = x.Approved,
                 ApplicationUserId = x.ApplicationUserId,
                 ApplicationUser = new ApplicationUser { FirstName = x.ApplicationUser.FirstName, LastName = x.ApplicationUser.LastName },
                 BookingTimeSlotModelsId = x.bookingTimeSlotModelId,
                 BookingTimeSlotModels = x.bookingTimeSlotModel
             }).ToList());
 
+        }
+
+        public async Task<List<BookingModels>> GetUnapprovedBookingsByUserId(string id)
+        {
+            var a = await (from p in context.Bookings
+                           where p.ApplicationUserId == id && p.Approved == false
+                           select new
+                           {
+                               id = p.Id,
+                               customerName = p.CustomerName,
+                               customerEmail = p.CustomerEmail,
+                               description = p.description,
+                               bookingTimeSlotModelId = p.BookingTimeSlotModelsId,
+                               bookingTimeSlotModel = p.BookingTimeSlotModels,
+
+                               ApplicationUserId = p.ApplicationUser.Id,
+                               ApplicationUser = new
+                               {
+                                   FirstName = p.ApplicationUser.FirstName,
+                                   LastName = p.ApplicationUser.LastName
+                               }
+                           }).ToListAsync();
+
+
+            return (a.Select(x => new BookingModels
+            {
+                Id = x.id,
+                description = x.description,
+                CustomerEmail = x.customerEmail,
+                CustomerName = x.customerName,
+                ApplicationUserId = x.ApplicationUserId,
+                ApplicationUser = new ApplicationUser { FirstName = x.ApplicationUser.FirstName, LastName = x.ApplicationUser.LastName },
+                BookingTimeSlotModelsId = x.bookingTimeSlotModelId,
+                BookingTimeSlotModels = x.bookingTimeSlotModel
+            }).ToList());
         }
     }
 }

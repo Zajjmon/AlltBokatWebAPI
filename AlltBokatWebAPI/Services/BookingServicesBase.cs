@@ -43,7 +43,7 @@ namespace AlltBokatWebAPI.Services
             return bookingModel;
         }
         
-        // TO-DO kolla hur man konverterar en lista med modeller till en lista med DTO's
+       
         public virtual List<SingleBookingDTO> ConvertListOfBookingModelsToListOfBookingsDTO(List<BookingModels> input)
         {
             var ListOfBookingDTOs = new List<SingleBookingDTO>();
@@ -64,6 +64,7 @@ namespace AlltBokatWebAPI.Services
                 CustomerEmail = input.CustomerEmail,
                 CustomerName = input.CustomerName,
                 Description = input.description,
+                Approved = input.Approved,
                 StartTime = input.BookingTimeSlotModels.startTime,
                 EndTime = input.BookingTimeSlotModels.endTime,
                 ApplicationUserFirstName = input.ApplicationUser.FirstName,
@@ -72,6 +73,20 @@ namespace AlltBokatWebAPI.Services
             };
             return BookingDTO;
         }
-        
+
+        public virtual BookingModels ConvertSingleBookingDTOToBookingModel(SingleBookingDTO input)
+        {
+            return new BookingModels
+            {
+                Id = input.Id,
+                CustomerEmail = input.CustomerEmail,
+                CustomerName = input.CustomerName,
+                description = input.Description,
+                Approved = input.Approved
+                
+            };
+        }
+
+
     }
 }

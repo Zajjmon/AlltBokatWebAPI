@@ -52,7 +52,7 @@ namespace AlltBokatWebAPI.Controllers
             return Ok(await bookingServices.GetSingleBooking(id));
 
         }
-        // GET: api/BookingModels/UsersBookings/
+        // GET: api/BookingModels/UsersBookings/5
         [Route("api/BookingModels/UsersBookings/{Id}")]
         [ResponseType(typeof(List<SingleBookingDTO>))]
         public async Task<IHttpActionResult> GetBookingByUserId(string id)
@@ -64,6 +64,32 @@ namespace AlltBokatWebAPI.Controllers
             }
             return Ok(listOfBookings);
         }
+
+        // GET: api/BookingModels/UsersBookings/5
+        [Route("api/BookingModels/UnapprovedBookings/{Id}")]
+        [ResponseType(typeof(List<SingleBookingDTO>))]
+        public async Task<IHttpActionResult> GetUnapprovedBookingByUserId(string id)
+        {
+            var listOfBookings = await bookingServices.GetListOfUnapprovedBookingsByUserId(id);
+            if (listOfBookings == null)
+            {
+                return ResponseMessage(Request.CreateResponse(HttpStatusCode.BadRequest, "There is no booking associated with that application user ID."));
+            }
+            return Ok(listOfBookings);
+        }
+
+        // PUT: api/BookingModels/ApproveBooking/5 // 
+        [Route("api/BookingModels/ApproveBooking/{Id}")]
+        [ResponseType(typeof(void))]
+        public async Task<IHttpActionResult> PutApproveBooking(int id)
+        {
+            var approvedBooking = await bookingServices.PutApproveBooking(id);
+            if(approvedBooking == null)
+                return ResponseMessage(Request.CreateResponse(HttpStatusCode.BadRequest, "There is no booking with that ID."));
+
+            return Ok(approvedBooking);
+        }
+
 
         // PUT: api/BookingModels/5
         [ResponseType(typeof(void))]

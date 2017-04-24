@@ -69,6 +69,11 @@ namespace AlltBokatWebAPI.Services
             
         }
 
+        public async Task<List<BookingDTOs.SingleBookingDTO>> GetListOfUnapprovedBookingsByUserId(string Id)
+        {
+            return ConvertListOfBookingModelsToListOfBookingsDTO(await bookingRepository.GetUnapprovedBookingsByUserId(Id));
+        }
+
         public async Task<BookingDTOs.BookingRequestDTO> UpdateSingleBooking(int inputId, BookingDTOs.BookingRequestDTO bookingRequest)
         {
             
@@ -77,6 +82,9 @@ namespace AlltBokatWebAPI.Services
             
         }
 
-
+        public async Task<BookingDTOs.SingleBookingDTO> PutApproveBooking(int Id)
+        {
+            return ConvertBookingModelToSingleBookingDTO(await bookingRepository.PutApproveBooking(Id));
+        }
     }
 }

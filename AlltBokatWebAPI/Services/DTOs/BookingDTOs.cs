@@ -14,6 +14,7 @@ namespace AlltBokatWebAPI.Services.DTOs
             public string CustomerName { get; set; }
             public string Description { get; set; }
             public string ApplicationUserId { get; set; }
+            public bool Approved { get; set; }
             public DateTime StartTime { get; set; }
             public DateTime EndTime { get; set; }
 
@@ -27,6 +28,7 @@ namespace AlltBokatWebAPI.Services.DTOs
             public string CustomerName { get; set; }
             public string CustomerEmail { get; set; }
             public string Description { get; set; }
+            public bool Approved { get; set; }
             public string ApplicationUserFirstName { get; set; }
             public string ApplicationUserLastName { get; set; }
 
