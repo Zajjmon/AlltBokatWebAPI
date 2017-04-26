@@ -15,5 +15,6 @@ namespace AlltBokatWebAPI.Models
         public int Id { get; set; }
         public string ThemeName { get; set; }
         public string BootStrapUrl { get; set; }
+        public string PictureUrl { get; set; }
     }
 }
