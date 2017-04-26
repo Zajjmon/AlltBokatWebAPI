@@ -250,6 +250,14 @@
     <Compile Include="Migrations\201704251310306_pictureUrl.Designer.cs">
       <DependentUpon>201704251310306_pictureUrl.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201704261041559_addStartText.cs" />
+    <Compile Include="Migrations\201704261041559_addStartText.Designer.cs">
+      <DependentUpon>201704261041559_addStartText.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201704261042519_addedStarttext2.cs" />
+    <Compile Include="Migrations\201704261042519_addedStarttext2.Designer.cs">
+      <DependentUpon>201704261042519_addedStarttext2.cs</DependentUpon>
+    </Compile>
     <Compile Include="Models\CategoryModels.cs" />
     <Compile Include="Models\MailModels.cs" />
     <Compile Include="Models\VisualSettingsModel.cs" />
@@ -400,6 +408,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201704251310306_pictureUrl.resx">
       <DependentUpon>201704251310306_pictureUrl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201704261041559_addStartText.resx">
+      <DependentUpon>201704261041559_addStartText.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201704261042519_addedStarttext2.resx">
+      <DependentUpon>201704261042519_addedStarttext2.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
