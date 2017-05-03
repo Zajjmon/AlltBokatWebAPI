@@ -11,6 +11,8 @@ using Owin;
 using AlltBokatWebAPI.Providers;
 using AlltBokatWebAPI.Models;
 
+
+
 namespace AlltBokatWebAPI
 {
     public partial class Startup
@@ -22,6 +24,11 @@ namespace AlltBokatWebAPI
         // For more information on configuring authentication, please visit http://go.microsoft.com/fwlink/?LinkId=301864
         public void ConfigureAuth(IAppBuilder app)
         {
+
+
+            app.UseCors(Microsoft.Owin.Cors.CorsOptions.AllowAll);
+
+
             // Configure the db context and user manager to use a single instance per request
             app.CreatePerOwinContext(ApplicationDbContext.Create);
             app.CreatePerOwinContext<ApplicationUserManager>(ApplicationUserManager.Create);
@@ -45,6 +52,10 @@ namespace AlltBokatWebAPI
 
             // Enable the application to use bearer tokens to authenticate users
             app.UseOAuthBearerTokens(OAuthOptions);
+
+            ///Install-Package Microsoft.Owin.Cors -Version 2.1.0
+            //app.UseCors(Microsoft.Owin.Cors.CorsOptions.AllowAll);
+
 
             // Uncomment the following lines to enable logging in with third party login providers
             //app.UseMicrosoftAccountAuthentication(

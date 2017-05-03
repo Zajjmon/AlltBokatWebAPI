@@ -11,13 +11,25 @@ namespace AlltBokatWebAPI
 
     public class ApplicationUserManager : UserManager<ApplicationUser>
     {
+
+
+
+
+
         public ApplicationUserManager(IUserStore<ApplicationUser> store)
             : base(store)
         {
         }
 
+
+
+
         public static ApplicationUserManager Create(IdentityFactoryOptions<ApplicationUserManager> options, IOwinContext context)
         {
+            // Allows cors for the /token endpoint this is different from webapi endpoints. Tillagt
+            //context.Response.Headers.Add("Access-Control-Allow-Origin", new[] { "*" });
+
+
             var manager = new ApplicationUserManager(new UserStore<ApplicationUser>(context.Get<ApplicationDbContext>()));
             // Configure validation logic for usernames
             manager.UserValidator = new UserValidator<ApplicationUser>(manager)

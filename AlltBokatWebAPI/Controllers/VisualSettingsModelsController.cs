@@ -20,6 +20,7 @@ namespace AlltBokatWebAPI.Controllers
         // GET: api/VisualSettingsModels
         public IQueryable<VisualSettingsModel> GetVisualSettingsModels()
         {
+
             return db.VisualSettingsModels;
         }
 
