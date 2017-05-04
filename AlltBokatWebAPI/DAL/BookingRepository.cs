@@ -11,15 +11,15 @@ namespace AlltBokatWebAPI.DAL
 {
     public class BookingRepository : IBookingRepository, IDisposable
     {
-        
+
 
         private ApplicationDbContext context;
-        
+
 
         public BookingRepository(ApplicationDbContext context)
         {
             this.context = context;
-            
+
         }
 
 
@@ -37,35 +37,40 @@ namespace AlltBokatWebAPI.DAL
 
         }
 
-        
+
         public async Task<BookingModels> GetBookingModelByIdAsync(int id)
         {
-            
+
 
             var a = await (from p in context.Bookings
-                       where p.Id == id
-                       select new { id = p.Id,
-                           customerName = p.CustomerName,
-                           customerEmail = p.CustomerEmail,
-                           description = p.description,
-                           bookingTimeSlotModelId = p.BookingTimeSlotModelsId,
-                           bookingTimeSlotModel = p.BookingTimeSlotModels,
-                           ApplicationUserId = p.ApplicationUser.Id,
-                           Approved = p.Approved,
-                           ApplicationUser = new 
-                            {
-                              FirstName = p.ApplicationUser.FirstName,
-                              LastName = p.ApplicationUser.LastName
-                            }}).ToListAsync();
+                           where p.Id == id
+                           select new
+                           {
+                               id = p.Id,
+                               customerName = p.CustomerName,
+                               customerEmail = p.CustomerEmail,
+                               description = p.description,
+                               bookingTimeSlotModelId = p.BookingTimeSlotModelsId,
+                               bookingTimeSlotModel = p.BookingTimeSlotModels,
+                               ApplicationUserId = p.ApplicationUser.Id,
+                               Approved = p.Approved,
+                               ApplicationUser = new
+                               {
+                                   FirstName = p.ApplicationUser.FirstName,
+                                   LastName = p.ApplicationUser.LastName
+                               }
+                           }).ToListAsync();
 
 
-            return (a.Select(x => new BookingModels {
-                Id = x.id, description = x.description,
+            return (a.Select(x => new BookingModels
+            {
+                Id = x.id,
+                description = x.description,
                 CustomerEmail = x.customerEmail,
                 CustomerName = x.customerName,
                 Approved = x.Approved,
                 ApplicationUserId = x.ApplicationUserId,
-                ApplicationUser = new ApplicationUser { FirstName = x.ApplicationUser.FirstName, LastName = x.ApplicationUser.LastName},
+                ApplicationUser = new ApplicationUser { FirstName = x.ApplicationUser.FirstName, LastName = x.ApplicationUser.LastName },
                 BookingTimeSlotModelsId = x.bookingTimeSlotModelId,
                 BookingTimeSlotModels = x.bookingTimeSlotModel
             }).FirstOrDefault());
@@ -74,25 +79,26 @@ namespace AlltBokatWebAPI.DAL
         public async Task<List<BookingModels>> GetAllBookings()
         {
 
-            
-            var a = await (from p in context.Bookings
-                             
-                             select new
-                             {
-                                 id = p.Id,
-                                 customerName = p.CustomerName,
-                                 customerEmail = p.CustomerEmail,
-                                 description = p.description,
-                                 bookingTimeSlotModelId = p.BookingTimeSlotModelsId,
-                                 bookingTimeSlotModel = p.BookingTimeSlotModels,
 
-                                 ApplicationUserId = p.ApplicationUser.Id,
-                                 ApplicationUser = new
-                                 {
-                                     FirstName = p.ApplicationUser.FirstName,
-                                     LastName = p.ApplicationUser.LastName
-                                 }
-                             }).ToListAsync();
+            var a = await (from p in context.Bookings
+
+                           select new
+                           {
+                               id = p.Id,
+                               customerName = p.CustomerName,
+                               customerEmail = p.CustomerEmail,
+                               description = p.description,
+                               approved = p.Approved,
+                               bookingTimeSlotModelId = p.BookingTimeSlotModelsId,
+                               bookingTimeSlotModel = p.BookingTimeSlotModels,
+
+                               ApplicationUserId = p.ApplicationUser.Id,
+                               ApplicationUser = new
+                               {
+                                   FirstName = p.ApplicationUser.FirstName,
+                                   LastName = p.ApplicationUser.LastName
+                               }
+                           }).ToListAsync();
 
 
             return (a.Select(x => new BookingModels
@@ -100,6 +106,7 @@ namespace AlltBokatWebAPI.DAL
                 Id = x.id,
                 description = x.description,
                 CustomerEmail = x.customerEmail,
+                Approved = x.approved,
                 CustomerName = x.customerName,
                 ApplicationUserId = x.ApplicationUserId,
                 ApplicationUser = new ApplicationUser { FirstName = x.ApplicationUser.FirstName, LastName = x.ApplicationUser.LastName },
@@ -109,14 +116,14 @@ namespace AlltBokatWebAPI.DAL
 
 
         }
-        
+
 
         public async Task<BookingModels> PostBookingModels(BookingModels bookingRequest)
         {
 
             try
             {
-               
+
 
                 context.Bookings.Add(bookingRequest);
                 await context.SaveChangesAsync();
@@ -135,7 +142,7 @@ namespace AlltBokatWebAPI.DAL
 
         public async Task<BookingModels> PutBookingModels(int id, BookingModels bookingModels)
         {
-            
+
             context.Entry(bookingModels).State = EntityState.Modified;
 
             try
@@ -158,7 +165,7 @@ namespace AlltBokatWebAPI.DAL
             context.Entry(approvedBooking).Property(x => x.Approved).IsModified = true;
             try
             {
-                
+
                 await context.SaveChangesAsync();
                 return approvedBooking;
             }
@@ -196,25 +203,25 @@ namespace AlltBokatWebAPI.DAL
         public async Task<List<BookingModels>> GetBookingsByApplicationUserId(string Id)
         {
 
-           
+
             var a = await (from p in context.Bookings
-                             where p.ApplicationUserId == Id
-                             select new
-                             {
-                                 id = p.Id,
-                                 customerName = p.CustomerName,
-                                 customerEmail = p.CustomerEmail,
-                                 description = p.description,
-                                 bookingTimeSlotModelId = p.BookingTimeSlotModelsId,
-                                 bookingTimeSlotModel = p.BookingTimeSlotModels,
-                                 Approved = p.Approved,
-                                 ApplicationUserId = p.ApplicationUser.Id,
-                                 ApplicationUser = new
-                                 {
-                                     FirstName = p.ApplicationUser.FirstName,
-                                     LastName = p.ApplicationUser.LastName
-                                 }
-                             }).ToListAsync();
+                           where p.ApplicationUserId == Id
+                           select new
+                           {
+                               id = p.Id,
+                               customerName = p.CustomerName,
+                               customerEmail = p.CustomerEmail,
+                               description = p.description,
+                               bookingTimeSlotModelId = p.BookingTimeSlotModelsId,
+                               bookingTimeSlotModel = p.BookingTimeSlotModels,
+                               Approved = p.Approved,
+                               ApplicationUserId = p.ApplicationUser.Id,
+                               ApplicationUser = new
+                               {
+                                   FirstName = p.ApplicationUser.FirstName,
+                                   LastName = p.ApplicationUser.LastName
+                               }
+                           }).ToListAsync();
 
 
             return (a.Select(x => new BookingModels

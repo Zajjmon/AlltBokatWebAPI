@@ -17,12 +17,12 @@ namespace AlltBokatWebAPI.Controllers
     public class ApplicationUsersController : ApiController
     {
 
-        
+
         private IApplicationUserServices ApplicationUserService;
 
         public ApplicationUsersController()
         {
-           
+
             this.ApplicationUserService = new ApplicationUserServices();
         }
 
@@ -34,20 +34,20 @@ namespace AlltBokatWebAPI.Controllers
         // GET: api/ApplicationUsers
         //Returns a list of users with Id
         [ResponseType(typeof(List<ApplicationUserPersonInfoDTO>))]
-        public async Task<IHttpActionResult>Get()
+        public async Task<IHttpActionResult> Get()
         {
-            
+
             return Ok(await ApplicationUserService.GetAllApplicationUsersPersonInfo());
         }
 
         // GET: api/ApplicationUsers/5 
         //Returns a users info including id
         [ResponseType(typeof(List<ApplicationUserPersonInfoDTO>))]
-        public async Task<IHttpActionResult>Get(string id)
+        public async Task<IHttpActionResult> Get(string id)
         {
-              
 
-            return Ok(await ApplicationUserService.GetApplicationUserPersonInfoById(id)); 
+
+            return Ok(await ApplicationUserService.GetApplicationUserPersonInfoById(id));
         }
 
         //GET: api/ApplicationUsers/BookingWithinTimeRange
@@ -55,7 +55,7 @@ namespace AlltBokatWebAPI.Controllers
         // [Route("api/BookingModels/UsersBookings/{Id}")]
         [Route("api/BookingWithinTimeRange/{startTime}/{endTime}")]
         [ResponseType(typeof(List<ApplicationUserPersonInfoDTO>))]
-        public async Task<IHttpActionResult>GetWithinTimeRange(DateTime startTime, DateTime endTime)
+        public async Task<IHttpActionResult> GetWithinTimeRange(DateTime startTime, DateTime endTime)
         {
             return Ok(await ApplicationUserService.GetUsersWithBookingWithinTimeRange(startTime, endTime));
         }
@@ -77,8 +77,8 @@ namespace AlltBokatWebAPI.Controllers
         //// PUT: api/ApplicationUsers/5
         //public void Put(int id, [FromBody]string value)
         //{
-            
-            
+
+
 
 
         //}
