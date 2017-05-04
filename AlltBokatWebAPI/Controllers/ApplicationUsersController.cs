@@ -31,10 +31,6 @@ namespace AlltBokatWebAPI.Controllers
 
 
 
-
-
-
-
         // GET: api/ApplicationUsers
         //Returns a list of users with Id
         [ResponseType(typeof(List<ApplicationUserPersonInfoDTO>))]
