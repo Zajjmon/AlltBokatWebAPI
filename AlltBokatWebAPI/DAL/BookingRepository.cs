@@ -92,6 +92,7 @@ namespace AlltBokatWebAPI.DAL
                                bookingTimeSlotModelId = p.BookingTimeSlotModelsId,
                                bookingTimeSlotModel = p.BookingTimeSlotModels,
 
+                               UserFirstName = p.ApplicationUser.FirstName,
                                ApplicationUserId = p.ApplicationUser.Id,
                                ApplicationUser = new
                                {
@@ -110,6 +111,8 @@ namespace AlltBokatWebAPI.DAL
                 CustomerName = x.customerName,
                 ApplicationUserId = x.ApplicationUserId,
                 ApplicationUser = new ApplicationUser { FirstName = x.ApplicationUser.FirstName, LastName = x.ApplicationUser.LastName },
+
+                
                 BookingTimeSlotModelsId = x.bookingTimeSlotModelId,
                 BookingTimeSlotModels = x.bookingTimeSlotModel
             }).ToList());
