@@ -50,23 +50,33 @@ namespace AlltBokatWebAPI.Controllers
             return Ok(await ApplicationUserService.GetApplicationUserPersonInfoById(id));
         }
 
-        //GET: api/ApplicationUsers/BookingWithinTimeRange
+        //GET: api/ApplicationUsers/BookingWithinTimeRange/dd-MM-yyyyHH!mm/dd-MM-yyyyHH!mm
         //Returns all users with a booking within the two Datetimes provided.
         // [Route("api/BookingModels/UsersBookings/{Id}")]
         [Route("api/BookingWithinTimeRange/{startTime}/{endTime}")]
         [ResponseType(typeof(List<ApplicationUserPersonInfoDTO>))]
-        public async Task<IHttpActionResult> GetWithinTimeRange(DateTime startTime, DateTime endTime)
+        public async Task<IHttpActionResult> GetWithinTimeRange(string startTime, string endTime)
         {
-            return Ok(await ApplicationUserService.GetUsersWithBookingWithinTimeRange(startTime, endTime));
+
+            DateTime startTimeFinished = DateTime.Parse(startTime.Replace("!", ":").Insert(10, " "));
+            DateTime endTimeFinished = DateTime.Parse(endTime.Replace("!", ":").Insert(10, " "));
+
+            return Ok(await ApplicationUserService.GetUsersWithBookingWithinTimeRange(startTimeFinished, endTimeFinished));
         }
 
-        //GET: api/ApplicationUsers/BookingNOTWithinTimeRange
+        //GET: api/ApplicationUsers/BookingNOTWithinTimeRange/dd-MM-yyyyHH!mm/dd-MM-yyyyHH!mm
         //Returns all users whom does NOT have a booking within the two provided Datetimes.
         [Route("api/BookingNOTWithinTimeRange/{startTime}/{endTime}")]
         [ResponseType(typeof(List<ApplicationUserPersonInfoDTO>))]
-        public async Task<IHttpActionResult> GetNOTWithinTimeRange(DateTime startTime, DateTime endTime)
+        public async Task<IHttpActionResult> GetNOTWithinTimeRange(string startTime, string endTime)
         {
-            return Ok(await ApplicationUserService.GetUsersWithBookingNOTWithinTimeRange(startTime, endTime));
+
+            
+            DateTime startTimeFinished = DateTime.Parse(startTime.Replace("!", ":").Insert(10, " "));
+            DateTime endTimeFinished = DateTime.Parse(endTime.Replace("!", ":").Insert(10, " "));
+            
+
+            return Ok(await ApplicationUserService.GetUsersWithBookingNOTWithinTimeRange(startTimeFinished, endTimeFinished));
         }
 
         // POST: api/ApplicationUsers
