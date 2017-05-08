@@ -220,6 +220,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\ApplicationUsersController.cs" />
     <Compile Include="Controllers\BookingModelsController.cs" />
+    <Compile Include="Controllers\BusinessHoursModelsController.cs" />
     <Compile Include="Controllers\CategoryModelsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\UserRatingModelsController.cs" />
@@ -261,6 +262,11 @@
     <Compile Include="Migrations\201704261042519_addedStarttext2.Designer.cs">
       <DependentUpon>201704261042519_addedStarttext2.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201705080728350_yz.cs" />
+    <Compile Include="Migrations\201705080728350_yz.Designer.cs">
+      <DependentUpon>201705080728350_yz.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Models\BusinessHoursModels.cs" />
     <Compile Include="Models\CategoryModels.cs" />
     <Compile Include="Models\MailModels.cs" />
     <Compile Include="Models\VisualSettingsModel.cs" />
@@ -417,6 +423,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201704261042519_addedStarttext2.resx">
       <DependentUpon>201704261042519_addedStarttext2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201705080728350_yz.resx">
+      <DependentUpon>201705080728350_yz.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

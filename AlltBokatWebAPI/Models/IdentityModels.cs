@@ -82,5 +82,7 @@ namespace AlltBokatWebAPI.Models
         public System.Data.Entity.DbSet<AlltBokatWebAPI.Models.CategoryModels> CategoryModels { get; set; }
 
         public System.Data.Entity.DbSet<AlltBokatWebAPI.Models.VisualSettingsModel> VisualSettingsModels { get; set; }
+
+        public System.Data.Entity.DbSet<AlltBokatWebAPI.Models.BusinessHoursModels> BusinessHoursModels { get; set; }
     }
 }
