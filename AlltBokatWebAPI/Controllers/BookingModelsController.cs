@@ -132,13 +132,13 @@ namespace AlltBokatWebAPI.Controllers
             return CreatedAtRoute("DefaultApi", new { id = bookingRequest.Id }, bookingRequest);
         }
 
-        // DELETE: api/BookingModels/5
+        // DELETE: api/BookingModels/5/234234hdfj23eh23rb2u3rwehrb
         [ResponseType(typeof(SingleBookingDTO))]
-        public async Task<IHttpActionResult> DeleteBookingModels(int id)
+        public async Task<IHttpActionResult> DeleteBookingModels(int bookingId, string userId)
         {
 
 
-            SingleBookingDTO singleBookingDTO = await bookingServices.DeleteSingleBooking(id);
+            SingleBookingDTO singleBookingDTO = await bookingServices.DeleteSingleBooking(bookingId, userId);
             if (singleBookingDTO == null)
             {
                 return NotFound();

@@ -11,7 +11,7 @@ namespace AlltBokatWebAPI.Services
     public interface IBookingServices : IDisposable
     {
         
-        Task<SingleBookingDTO> DeleteSingleBooking(int inputId);
+        Task<SingleBookingDTO> DeleteSingleBooking(int bookingId, string userId);
         Task<BookingRequestDTO> UpdateSingleBooking(int inputId, BookingRequestDTO bookingRequest);
         
         Task<SingleBookingDTO> GetSingleBooking(int inputId);

@@ -23,11 +23,13 @@ namespace AlltBokatWebAPI.DAL
         }
 
 
-        public async Task<BookingModels> DeleteBookingModels(int id)
+        public async Task<BookingModels> DeleteBookingModels(int bookingId, string userId)
         {
-            BookingModels bookingModels = await context.Bookings.FindAsync(id);
+            BookingModels bookingModels = await context.Bookings.FindAsync(bookingId);
             BookingTimeSlotModels bookingtimeslot = bookingModels.BookingTimeSlotModels;
             if (bookingModels == null)
+                return null;
+            if (!bookingModels.ApplicationUserId.Equals(userId))
                 return null;
 
             context.Bookings.Remove(bookingModels);

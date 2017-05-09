@@ -38,10 +38,10 @@ namespace AlltBokatWebAPI.Services
 
         }
 
-        public async Task<BookingDTOs.SingleBookingDTO> DeleteSingleBooking(int inputId)
+        public async Task<BookingDTOs.SingleBookingDTO> DeleteSingleBooking(int bookingId, string userId)
         {
             
-            return ConvertBookingModelToSingleBookingDTO(await bookingRepository.DeleteBookingModels(inputId));
+            return ConvertBookingModelToSingleBookingDTO(await bookingRepository.DeleteBookingModels(bookingId, userId));
             
         }
 

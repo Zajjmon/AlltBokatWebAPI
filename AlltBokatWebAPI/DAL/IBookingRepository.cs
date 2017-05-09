@@ -16,7 +16,7 @@ namespace AlltBokatWebAPI.DAL
         Task<BookingModels> GetBookingModelByIdAsync(int id);
         Task<BookingModels> PutBookingModels(int id, BookingModels bookingModels);
         Task<BookingModels> PostBookingModels(BookingModels BookingRequest);
-        Task<BookingModels> DeleteBookingModels(int id);
+        Task<BookingModels> DeleteBookingModels(int bookingId, string userId);
         Task<List<BookingModels>> GetBookingsByApplicationUserId(string Id);
         Task<List<BookingModels>> GetUnapprovedBookingsByUserId(string id);
         Task<BookingModels> PutApproveBooking(int id);
