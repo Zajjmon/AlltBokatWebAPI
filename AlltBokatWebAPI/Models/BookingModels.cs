@@ -12,7 +12,7 @@ namespace AlltBokatWebAPI.Models
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
-        [DataType(DataType.EmailAddress)] // TO-DO lägg till REGEX-sträng för EMAIL
+        [DataType(DataType.EmailAddress)] 
         public string CustomerEmail { get; set; }
         public string CustomerName { get; set; }
         public string description { get; set; }

@@ -20,8 +20,7 @@ namespace AlltBokatWebAPI.DAL
         Task<List<BookingModels>> GetBookingsByApplicationUserId(string Id);
         Task<List<BookingModels>> GetUnapprovedBookingsByUserId(string id);
         Task<BookingModels> PutApproveBooking(int id);
-        //Task<BookingInfoViewModelWithId> GetSingleBooking(int id);
-        //void Save();
+       
 
     }
 }

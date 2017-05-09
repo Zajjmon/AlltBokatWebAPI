@@ -52,7 +52,7 @@ namespace AlltBokatWebAPI.Controllers
 
         //GET: api/ApplicationUsers/BookingWithinTimeRange/2012-08-17T20!16/2012-03-12T20!16
         //Returns all users with a booking within the two Datetimes provided.
-        // [Route("api/BookingModels/UsersBookings/{Id}")]
+        
         [Route("api/BookingWithinTimeRange/{startTime}/{endTime}")]
         [ResponseType(typeof(List<ApplicationUserPersonInfoDTO>))]
         public async Task<IHttpActionResult> GetWithinTimeRange(string startTime, string endTime)
@@ -80,28 +80,7 @@ namespace AlltBokatWebAPI.Controllers
             return Ok(await ApplicationUserService.GetUsersWithBookingNOTWithinTimeRange(startTimeFinished, endTimeFinished));
         }
 
-        // POST: api/ApplicationUsers
-        //public void Post([FromBody]string value)
-        //{
-        //}
-
-        //// PUT: api/ApplicationUsers/5
-        //public void Put(int id, [FromBody]string value)
-        //{
-
-
-
-
-        //}
-
-        //// DELETE: api/ApplicationUsers/5
-        //public void Delete(int id)
-        //{
-        //}
-
-
-
-
+       
 
 
     }

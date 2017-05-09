@@ -13,7 +13,6 @@ namespace AlltBokatWebAPI.Models
         public DateTime startTime { get; set; }
         public DateTime endTime { get; set; }
 
-        //public int BookingModelsId { get; set; }
-        //public virtual BookingModels BookingModels { get; set; }
+        
     }
 }

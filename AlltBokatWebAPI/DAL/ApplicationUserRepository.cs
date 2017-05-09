@@ -41,24 +41,6 @@ namespace AlltBokatWebAPI.DAL
 
 
 
-        //public async Task<List<ApplicationUserInfoViewModelWhithId>> GetApplicationUserNames()
-        //{
-        //    using (context)
-        //    {
-
-                
-        //         var FullList =await UserManager.Users.ToListAsync();
-
-        //        List<ApplicationUserInfoViewModelWhithId> usrList = new List<ApplicationUserInfoViewModelWhithId>();
-        //        usrList = ApplicationUserServices.ConvertToApplicationUserInfoViewModelWithId(FullList);
-
-
-
-
-
-        //        return usrList;
-        //    }
-        //}
 
         private bool disposed = false;
 

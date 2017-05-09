@@ -25,10 +25,6 @@ namespace AlltBokatWebAPI.Services
         Task<SingleBookingDTO> PutApproveBooking(int Id);
 
 
-        // detta TODO att skapa abstract bas-klass på servicen
-        //Task<BookingModels> ConvertBookingRequestDTOtoBookingModels(BookingRequestDTO input);
-        //Task<ListOfBookingsDTO> ConvertListOfBookingModelsToListOfBookingsDTO(IQueryable<BookingModels> input); 
-        //Task<SingleBookingDTO> ConvertBookingModelToSingleBookingDTO(BookingModels input);
 
     }
 }

@@ -124,7 +124,7 @@ namespace AlltBokatWebAPI.Controllers
                 return ResponseMessage(Request.CreateResponse(HttpStatusCode.BadRequest, "The Booking Request is invalid or otherwise incomplete."));
             }
             // kalla på service layer valideringsmetod(bookingRequest);
-            // gammal call BookingModels booking = await bookingRepository.PostBookingModels(bookingRequest);
+            
             bookingRequest = await bookingServices.AddBookingRequest(bookingRequest);
             // TO DO returnera fel om en sådan booking redan finns
 
