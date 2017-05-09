@@ -266,6 +266,26 @@
     <Compile Include="Migrations\201705080728350_yz.Designer.cs">
       <DependentUpon>201705080728350_yz.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201705091351058_123.cs" />
+    <Compile Include="Migrations\201705091351058_123.Designer.cs">
+      <DependentUpon>201705091351058_123.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201705091404281_456.cs" />
+    <Compile Include="Migrations\201705091404281_456.Designer.cs">
+      <DependentUpon>201705091404281_456.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201705091425577_333.cs" />
+    <Compile Include="Migrations\201705091425577_333.Designer.cs">
+      <DependentUpon>201705091425577_333.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201705091438193_678.cs" />
+    <Compile Include="Migrations\201705091438193_678.Designer.cs">
+      <DependentUpon>201705091438193_678.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201705091533270_888.cs" />
+    <Compile Include="Migrations\201705091533270_888.Designer.cs">
+      <DependentUpon>201705091533270_888.cs</DependentUpon>
+    </Compile>
     <Compile Include="Models\BusinessHoursModels.cs" />
     <Compile Include="Models\CategoryModels.cs" />
     <Compile Include="Models\MailModels.cs" />
@@ -349,6 +369,7 @@
     <Content Include="Areas\HelpPage\Views\Help\DisplayTemplates\ApiGroup.cshtml" />
     <Content Include="Areas\HelpPage\Views\Help\Api.cshtml" />
     <None Include="Properties\PublishProfiles\AlltBokatWebApi - Web Deploy.pubxml" />
+    <None Include="Properties\PublishProfiles\AlltBokatWebApi2 - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -426,6 +447,21 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201705080728350_yz.resx">
       <DependentUpon>201705080728350_yz.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201705091351058_123.resx">
+      <DependentUpon>201705091351058_123.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201705091404281_456.resx">
+      <DependentUpon>201705091404281_456.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201705091425577_333.resx">
+      <DependentUpon>201705091425577_333.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201705091438193_678.resx">
+      <DependentUpon>201705091438193_678.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201705091533270_888.resx">
+      <DependentUpon>201705091533270_888.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
